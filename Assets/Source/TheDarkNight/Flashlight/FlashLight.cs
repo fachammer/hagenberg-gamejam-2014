@@ -8,7 +8,6 @@ using UniRx;
 
 namespace TheDarkNight.FlashLight {
     
-    [RequireComponent(typeof(IInventory))]
     public class FlashLight : MonoBehaviour, IFlashLight {
         private bool turnedOn = false;
         private IInventory inventory;
@@ -16,11 +15,12 @@ namespace TheDarkNight.FlashLight {
         private IBattery batteryInUse;
 
         private void Start() {
-            inventory = GetComponent<Inventory>();            
+            inventory = this.TryGetComponentInParent<Inventory>();
         }
 
         public bool TryTurnOn() {
-            if(!turnedOn && TryUseNewBattery()) { 
+            if(!turnedOn && TryUseNewBattery()) {
+                DrawLight(true);
                 turnedOn = true;
                 return true;
             }
@@ -29,6 +29,7 @@ namespace TheDarkNight.FlashLight {
 
         public bool TryTurnOff() {
             if(turnedOn) {
+                DrawLight(false);
                 turnedOn = false;
                 return true;
             }
@@ -36,12 +37,19 @@ namespace TheDarkNight.FlashLight {
         }
 
         private void Update() {
+            if(Input.GetKeyUp(KeyCode.Space)) {
+                if(turnedOn)
+                    TryTurnOff();
+                else
+                    TryTurnOn();
+            }
+
             if(turnedOn) {
                 batteryInUse.DecreaseBatteryTime(Time.deltaTime);
                 if(batteryInUse.GetRemainingTime() <= 0) {
                     inventory.RemoveItem(batteryInUse);
                     if(!TryUseNewBattery()) {
-                        turnedOn = false;
+                        TryTurnOff();
                     }
                 }
             }
@@ -49,24 +57,27 @@ namespace TheDarkNight.FlashLight {
 
         private bool TryUseNewBattery() {
             UpdateBatteries();
-            float batteryLoad = batteries.Sum(b => b.GetRemainingTime());
 
-            if(batteries.Count() > 0 && batteryLoad > 0) {
-                batteryInUse = batteries.Where(b => b.GetRemainingTime() > 0).First();
-                return true;
-            }
-            return false;
+            if(batteries == null || batteries.Count() <= 0)
+                return false;
+
+            float batteryLoad = batteries.Select(b => b.GetRemainingTime()).Sum();
+
+            if(batteryLoad <= 0)
+                return false;
+            
+            batteryInUse = batteries.Where(b => b.GetRemainingTime() > 0).First();
+            return true;
         }
 
         private void UpdateBatteries() {
-            batteries = inventory.GetItems().Where(item => item is IBattery) as List<IBattery>;
+            batteries = inventory.GetItems().Where(item => item is IBattery).Select(item => item as IBattery).ToList();
         }
 
         private void DrawLight(bool lightEnabled) {
-            Light light = this.TryGetComponentsInChildren<Light>().First();
+            Light light = this.TryGetComponent<Light>();
             light.enabled = lightEnabled;
-            GameObject lightCone = this.TryGetComponentsInChildren<Transform>().Where(g => g.tag == Tags.LIGHT_CONE).First().gameObject;
-            lightCone.SetActive(lightEnabled);
+            GetComponentsInChildren<MeshRenderer>().First().enabled = lightEnabled;
         }
     }
 }

@@ -1,15 +1,12 @@
 using UnityEngine;
 using System.Collections;
+using TheDarkNight.Picking;
 
 namespace TheDarkNight.FlashLight {
-    public class Battery : MonoBehaviour, IBattery {
+    public class Battery : Pickable, IBattery {
         [SerializeField]
         private float runTimeSeconds = 5f;
-
-        public Transform GetTransform() {
-            return this.transform;
-        }
-
+        
         public float GetRemainingTime() {
             return runTimeSeconds;
         }
