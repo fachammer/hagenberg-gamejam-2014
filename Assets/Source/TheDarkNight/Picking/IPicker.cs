@@ -1,15 +1,12 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class IPicker : MonoBehaviour {
+namespace TheDarkNight.Picking {
+    public interface IPicker {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+        void CanPickupPickable(IPickable pickable);
+        void CannotPickupPickable(IPickable pickable);
+        void PickUpPickable(IPickable pickable);
+
+    }
 }
