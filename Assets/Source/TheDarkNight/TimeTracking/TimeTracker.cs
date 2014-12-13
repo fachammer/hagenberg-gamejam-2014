@@ -1,6 +1,4 @@
-﻿using ModestTree.Zenject;
-using TheDarkNight.Observables.Time;
-using UniRx;
+﻿using UniRx;
 using UnityEngine;
 
 namespace TheDarkNight.TimeTracking {
@@ -17,9 +15,6 @@ namespace TheDarkNight.TimeTracking {
 
         private float? endTime;
 
-        [Inject]
-        public IObservableTime Time { get; set; }
-
         public IObservable<float> TrackedTime {
             get { return trackedTime; }
         }
@@ -34,8 +29,6 @@ namespace TheDarkNight.TimeTracking {
                 endTime = UnityEngine.Time.time;
                 trackedTime.OnNext(GetTime());
             }).AddTo(gameManagerSubscriptions);
-
-            Time.Once(5).Subscribe(_ => gameManager.EndGame());
         }
 
         private void OnDisable() {

@@ -1,9 +1,11 @@
-﻿using UniRx;
+﻿using PRO3.Utility;
 
 namespace TheDarkNight.Darkness {
 
     public interface IKillable {
 
-        IObservable<Unit> Killed { get; }
+        ObservableProperty<bool> Killed { get; }
+
+        void Kill();
     }
 }
