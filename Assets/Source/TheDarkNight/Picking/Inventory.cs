@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using TheDarkNight.Lights;
+using TheDarkNight.FlashLight;
 
 namespace TheDarkNight.Picking {
     public class Inventory : MonoBehaviour, IInventory{
