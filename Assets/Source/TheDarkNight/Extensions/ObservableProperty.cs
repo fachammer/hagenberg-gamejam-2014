@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using UniRx;
 
-namespace PRO3.Utility {
+namespace TheDarkNight.Utility {
 
     public class ObservableProperty<T> : IObservable<T> {
         private T value;
