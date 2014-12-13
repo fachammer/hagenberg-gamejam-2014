@@ -14,14 +14,14 @@ namespace TheDarkNight.Picking {
             collider.isTrigger = true;
         }
 
-        protected void OnTriggerEnter(Collider other) {
+        private void OnTriggerEnter(Collider other) {
             IPicker picker = other.GetClass<IPicker>();
             if(picker != null) {
                 picker.CanPickupPickable(this);
             }
         }
 
-        protected void OnTriggerExit(Collider other) {
+        private void OnTriggerExit(Collider other) {
             IPicker picker = other.GetClass<IPicker>();
             if(picker != null) {
                 picker.CannotPickupPickable(this);
