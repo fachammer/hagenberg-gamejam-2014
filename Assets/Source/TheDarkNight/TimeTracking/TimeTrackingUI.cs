@@ -19,7 +19,28 @@ namespace TheDarkNight.TimeTracking {
         }
 
         private void HandleTrackedTime(float surviveTime) {
-            text.text = "You survived for " + surviveTime + " seconds\nPress 'r' to restart\nPress 'q' to quit";
+            int minutes = ((int) surviveTime) / 60;
+            int seconds = (int) (surviveTime - minutes * 60);
+
+            string minutesText = "";
+            if(minutes == 1) {
+                minutesText = "1 minute";
+            }
+            else if(minutes > 1) {
+                minutesText = "" + minutes + " minutes";
+            }
+
+            string secondsText = "";
+            if(seconds == 1) {
+                secondsText = "1 second";
+            }
+            else if(seconds > 0) {
+                secondsText = "" + seconds + " seconds";
+            }
+
+            string timeText = minutesText + ((minutes > 0 && seconds > 0) ? " and " : "") + secondsText;
+
+            text.text = "You survived for " + timeText + "\nPress 'r' to restart\nPress 'q' to quit";
             text.enabled = true;
         }
     }
