@@ -13,8 +13,12 @@ namespace TheDarkNight.Darkness {
 
     public class Darkness : MonoBehaviour, IDarkness {
         private IDisposable updateSubscription = Disposable.Empty;
-        private Vector3 roomEntryPosition;
-        private Room nextRoom;
+        public Transform nextRoomEntry;
+        public Room nextRoom;
+        private Vector3 lastPos;
+
+        [SerializeField]
+        private GameObject darknessDummyPrefab;
 
         [Inject]
         public IObservableTime Time { get; set; }
@@ -23,13 +27,10 @@ namespace TheDarkNight.Darkness {
         public GameObjectInstantiator GOI { get; set; }
 
         [SerializeField]
-        private Room startingRoom;
+        private Transform startingEntry;
 
         [SerializeField]
         private float updateFrequency;
-
-        [SerializeField]
-        private float startWaitTime = 2;
 
         [SerializeField]
         private float maxSpeed = 1;
@@ -37,29 +38,53 @@ namespace TheDarkNight.Darkness {
         [SerializeField]
         private float minSpeed = 0.5f;
 
-        public void SetValues(Room startingRoom) {
-            this.startingRoom = startingRoom;
+        [SerializeField]
+        private float instantiateDistance = 1f;
+
+        [SerializeField]
+        private float startWaitSeconds = 1f;
+
+        public void SetValues(Transform startingEntry) {
+            this.startingEntry = startingEntry;
         }
-        
+
         private void Start() {
-                nextRoom = startingRoom;
-                SetNextRoomEntry();
-                updateSubscription = Time.ElapsedIntervals(1 / updateFrequency).Subscribe(_ => Move());
+            Time.Once(startWaitSeconds).Subscribe(_ => {
+                nextRoomEntry = startingEntry;
+                nextRoom = nextRoomEntry.GetComponentInParent<Room>();
+                lastPos = transform.position;
+                updateSubscription = Time.ElapsedIntervals(1 / updateFrequency).Subscribe(__ => Move());
+            });
         }
 
         private void Move() {
-            transform.position = Vector3.MoveTowards(transform.position, roomEntryPosition, UnityEngine.Random.Range(maxSpeed, minSpeed));
+            if(Vector3.Distance(transform.position, lastPos) > instantiateDistance) {
+                lastPos = transform.position;
+                Instantiate(darknessDummyPrefab, this.transform.position, this.transform.rotation);
+            }
 
-            if(transform.position == roomEntryPosition && nextRoom.possessed == false && !nextRoom.enlightened) {
-                IEnumerable<Room> adjacentRooms = nextRoom.GetAdjacentRooms();
-                List<Room> possibleNextRooms = adjacentRooms.Where(r => (!r.enlightened && !r.possessed)).ToList();
-                if(possibleNextRooms.Count() > 0) {
+            transform.position = Vector3.MoveTowards(transform.position, nextRoomEntry.position, UnityEngine.Random.Range(maxSpeed, minSpeed));
+
+            if(transform.position == nextRoomEntry.position && !nextRoom.possessed && !nextRoom.enlightened) {
+                IEnumerable<Transform> entriesToAdjacentRooms = nextRoom.GetAdjacentRoomsEntries();
+                List<Transform> possibleNextEntries = entriesToAdjacentRooms.Where(r => !r.GetComponentInParent<Room>().enlightened && !r.GetComponentInParent<Room>().possessed).ToList();
+
+                if(possibleNextEntries.Count() > 0) {
                     nextRoom.possessed = true;
-                    DuplicateSelf();
-                    nextRoom = possibleNextRooms.ElementAt(UnityEngine.Random.Range(0, possibleNextRooms.Count()));
-                    SetNextRoomEntry();
+
+                    DuplicateSelf(this.nextRoomEntry);
+
+                    nextRoomEntry = possibleNextEntries.ElementAt(UnityEngine.Random.Range(0, possibleNextEntries.Count()));
+                    nextRoom = nextRoomEntry.GetComponentInParent<Room>();                    
                 }
             }      
+        }        
+
+        private void DuplicateSelf(Transform nextEntry) {
+            GameObject copy = GOI.Instantiate(this.gameObject, this.transform.position, Quaternion.identity);
+            copy.transform.parent = this.transform.parent;
+            copy.transform.position = this.transform.position;
+            copy.GetComponent<Darkness>().SetValues(nextEntry);
         }
 
         public void Die() {
@@ -68,18 +93,6 @@ namespace TheDarkNight.Darkness {
 
         public void Hide() {
             this.gameObject.SetActive(false);
-        }
-
-        private GameObject DuplicateSelf() {
-            GameObject copy = GOI.Instantiate(this.gameObject, this.transform.position, Quaternion.identity);
-            copy.transform.parent = this.transform.parent;
-            copy.transform.position = this.transform.position;
-            copy.GetComponent<Darkness>().SetValues(this.nextRoom);
-            return copy;
-        }
-
-        private void SetNextRoomEntry() {
-            roomEntryPosition = nextRoom.GetEntryPositions().GetNearestToPosition(nextRoom.transform.position);//this.transform.position);
         }
 
         private void OnDestroy() {

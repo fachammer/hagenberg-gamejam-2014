@@ -16,20 +16,10 @@ namespace TheDarkNight.Rooms {
         public bool possessed = false;
 
         [SerializeField]
-        private List<Room> adjacentRooms;
+        private List<Transform> adjacentRoomsEntries;
 
-        [SerializeField]
-        private List<Transform> adjacentRoomEntries;
-
-        [SerializeField]
-        private List<Transform> roomEntries;
-
-        public IEnumerable<Room> GetAdjacentRooms() {
-            return adjacentRooms;
-        }
-
-        public IEnumerable<Vector3> GetEntryPositions() {
-            return roomEntries.Select(t => t.position).ToList();
+        public IEnumerable<Transform> GetAdjacentRoomsEntries() {
+            return adjacentRoomsEntries;
         }
         
         private void Start() {

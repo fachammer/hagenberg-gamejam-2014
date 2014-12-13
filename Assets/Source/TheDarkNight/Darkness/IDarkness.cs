@@ -7,8 +7,8 @@ namespace TheDarkNight.Darkness {
 
     public interface IDarkness {
         void Hide();
-        void Die();        
-        void SetValues(Room startingRoom);
+        void Die();
+        void SetValues(Transform startingEntry);
     }
 
 }
