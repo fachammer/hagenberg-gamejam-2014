@@ -12,32 +12,32 @@ namespace TheDarkNight.Picking {
         [SerializeField]
         private int maxLightBulbs = 1;
 
-        private List<GameObject> batteries = new List<GameObject>();
-        private List<GameObject> lightBulbs = new List<GameObject>();
+        private List<IBattery> batteries = new List<IBattery>();
+        private List<ILightBulb> lightBulbs = new List<ILightBulb>();
 
-        public bool AddItem(GameObject pickable) {
-            if(pickable.GetComponent<LightBulb>() != null && lightBulbs.Count < maxLightBulbs) {
-                lightBulbs.Add(pickable);
+        public bool AddItem(IPickable pickable) {
+            if(pickable is ILightBulb && lightBulbs.Count < maxLightBulbs) {
+                lightBulbs.Add(pickable as ILightBulb);
                 return true;
             }
-            else if(pickable.GetComponent<Battery>() != null && batteries.Count < maxBatteries) {
-                batteries.Add(pickable);
+            else if(pickable is IBattery && batteries.Count < maxBatteries) {
+                batteries.Add(pickable as IBattery);
                 return true;
             }
             return false;
         }
 
-        public bool RemoveItem(GameObject pickable) {
-            if(pickable.GetComponent<LightBulb>() != null) {
-                if(lightBulbs.Remove(pickable)){
-                    Destroy(pickable.gameObject);
+        public bool RemoveItem(IPickable pickable) {
+            if(pickable is ILightBulb) {
+                if(lightBulbs.Remove(pickable as ILightBulb)) {
+                    Destroy(pickable.GetTransform().gameObject);
                     return true;
                 }
                 return false;
             }
-            else if(pickable.GetComponent<Battery>() != null) {
-                if(batteries.Remove(pickable)) {
-                    Destroy(pickable.gameObject);
+            else if(pickable is IBattery) {
+                if(batteries.Remove(pickable as IBattery)) {
+                    Destroy(pickable.GetTransform().gameObject);
                     return true;
                 }
                 return false;

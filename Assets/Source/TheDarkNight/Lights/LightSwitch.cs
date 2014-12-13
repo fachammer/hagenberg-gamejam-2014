@@ -16,17 +16,13 @@ namespace TheDarkNight.Lights {
         }
 
         public void Toggle() {
-            if(!turnedOn) {
-                if(lightSource.CanTurnOn()) {
-                    turnedOn = true;
-                    lightSource.TurnOn();
-                }
+            if(!turnedOn && lightSource.CanTurnOn()) {
+                turnedOn = true;
+                lightSource.TurnOn();                
             }
-            else {
-                if(lightSource.CanTurnOff()) {
-                    turnedOn = false;
-                    lightSource.TurnOff();
-                }
+            else if(lightSource.CanTurnOff()) {
+                turnedOn = false;
+                lightSource.TurnOff();                
             }
         }
 

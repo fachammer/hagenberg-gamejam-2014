@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UniRx;
 using UnityEngine;
 
@@ -7,12 +7,12 @@ namespace TheDarkNight.Observables.Input {
     internal class ObservableAxis : MonoBehaviour, IObservableAxis {
 
         [SerializeField]
-        private string name;
+        private string axisName;
 
         private ISubject<float> axis = new Subject<float>();
 
         public string GetName() {
-            return name;
+            return axisName;
         }
 
         public IDisposable Subscribe(IObserver<float> observer) {
@@ -20,7 +20,7 @@ namespace TheDarkNight.Observables.Input {
         }
 
         private void Update() {
-            axis.OnNext(UnityEngine.Input.GetAxis(name));
+            axis.OnNext(UnityEngine.Input.GetAxis(axisName));
         }
     }
 }

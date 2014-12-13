@@ -2,9 +2,10 @@ using UnityEngine;
 using System.Collections;
 using System.Linq;
 using TheDarkNight.Extensions;
+using TheDarkNight.Picking;
 
 namespace TheDarkNight.Lights {
-    public class LightBulb : MonoBehaviour, ILightBulb {
+    public class LightBulb : Pickable, ILightBulb {
 
         private Light pointLight;
         private bool intact = true;

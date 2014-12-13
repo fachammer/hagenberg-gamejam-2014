@@ -9,14 +9,18 @@ namespace TheDarkNight.Picking {
 
     public class PickerController : MonoBehaviour {
 
+        [SerializeField]
+        private string PickupAxisName;
+
         private void Start() {
             AxesManager axesManager = this.TryGetClass<AxesManager>();
-            IObservableAxis pickUpAxes = axesManager.GetAxis("Fire1");
-            pickUpAxes.Subscribe(TryPickUp);
+            IObservableAxis pickUpAxes = axesManager.GetAxis(PickupAxisName);
+            pickUpAxes.DistinctUntilChanged().Subscribe(TryPickUp);
         }
 
         private void TryPickUp(float value) {
-            GetComponent<Picker>().PickUpPickable();
+            if(value > 0)
+                GetComponent<Picker>().PickUpPickable();
         }
     }
 

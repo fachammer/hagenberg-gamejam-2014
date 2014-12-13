@@ -1,15 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class Battery : MonoBehaviour {
+public class Battery : MonoBehaviour, IBattery {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    public Transform GetTransform() {
+        return this.transform;
+    }
 }

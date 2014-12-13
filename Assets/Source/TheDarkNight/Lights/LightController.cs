@@ -7,16 +7,21 @@ using TheDarkNight.Extensions;
 
 namespace TheDarkNight.Lights {
 
+    [RequireComponent(typeof(ISwitcher))]
     public class LightController : MonoBehaviour {
+
+        [SerializeField]
+        private string PickupAxisName;
 
         private void Start() {
             AxesManager axesManager = this.TryGetClass<AxesManager>();
-            IObservableAxis pickUpAxes = axesManager.GetAxis("Fire1");
-            pickUpAxes.Subscribe(TrySwitchSwitch);
+            IObservableAxis pickUpAxes = axesManager.GetAxis(PickupAxisName);
+            pickUpAxes.DistinctUntilChanged().Subscribe(TryToggleSwitch);
         }
 
-        private void TrySwitchSwitch(float value) {
-            GetComponent<Switcher>().ToggleSwitch();
+        private void TryToggleSwitch(float value) {
+            if(value > 0)
+                this.TryGetClass<ISwitcher>().ToggleSwitch();
         }
     }
 }

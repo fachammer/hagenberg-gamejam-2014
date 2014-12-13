@@ -4,8 +4,8 @@ using System.Collections;
 namespace TheDarkNight.Picking {
 
     public interface IInventory {
-        bool AddItem(GameObject pickable);
-        bool RemoveItem(GameObject pickable);       
+        bool AddItem(IPickable pickable);
+        bool RemoveItem(IPickable pickable);       
     }
 
 }

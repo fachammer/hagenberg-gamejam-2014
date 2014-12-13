@@ -5,6 +5,9 @@ using UniRx;
 namespace TheDarkNight.Lights {
     public class LightSource : MonoBehaviour, ILightSource {
 
+        public IObservable<ILightBulb> NewBulb { get { return newBulb; } }
+        private ISubject<ILightBulb> newBulb = new Subject<ILightBulb>();
+
         public IObservable<ILightSource> TurnedOn { get { return turnOn; } }
         private ISubject<ILightSource> turnOn = new Subject<ILightSource>();
 
@@ -34,6 +37,7 @@ namespace TheDarkNight.Lights {
         public bool TryInsertLightBulb(ILightBulb lightBulb) {  
             if(lightBulb == null) {
                 this.lightBulb = lightBulb;
+                newBulb.OnNext(lightBulb);
                 return true;
             }
             return false;
