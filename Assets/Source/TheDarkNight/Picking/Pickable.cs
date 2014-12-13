@@ -1,26 +1,31 @@
-using UnityEngine;
-using System.Collections;
 using TheDarkNight.Extensions;
+using UnityEngine;
 
 namespace TheDarkNight.Picking {
+
+    [RequireComponent(typeof(Collider))]
     public class Pickable : MonoBehaviour, IPickable {
 
-        public void OnTriggerEnter(Collider other) {
+        public Transform GetTransform() {
+            return this.transform;
+        }
+
+        protected virtual void Start() {
+            collider.isTrigger = true;
+        }
+
+        private void OnTriggerEnter(Collider other) {
             IPicker picker = other.GetClass<IPicker>();
             if(picker != null) {
                 picker.CanPickupPickable(this);
             }
         }
 
-        public void OnTriggerExit(Collider other) {
+        private void OnTriggerExit(Collider other) {
             IPicker picker = other.GetClass<IPicker>();
             if(picker != null) {
                 picker.CannotPickupPickable(this);
             }
-        }
-
-        public Transform GetTransform() {
-            return this.transform;
         }
     }
 }

@@ -1,12 +1,11 @@
-using UnityEngine;
-using System.Collections;
 using System.Linq;
 using TheDarkNight.Extensions;
 using TheDarkNight.Picking;
+using UnityEngine;
 
 namespace TheDarkNight.Lights {
-    public class LightBulb : Pickable, ILightBulb {
 
+    public class LightBulb : Pickable, ILightBulb {
         private Light pointLight;
         private bool intact = true;
 
@@ -14,10 +13,6 @@ namespace TheDarkNight.Lights {
             if(CanTurnOff())
                 TurnOff();
             intact = false;
-        }
-
-        private void Start() {
-            pointLight = this.TryGetComponentsInChildren<Light>().First();
         }
 
         public bool CanTurnOn() {
@@ -35,6 +30,10 @@ namespace TheDarkNight.Lights {
         public void TurnOff() {
             pointLight.enabled = false;
         }
-    }
 
+        protected override void Start() {
+            base.Start();
+            pointLight = this.TryGetComponentsInChildren<Light>().First();
+        }
+    }
 }
