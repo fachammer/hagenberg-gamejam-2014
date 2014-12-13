@@ -1,5 +1,5 @@
-﻿using ModestTree.Zenject;
-using PRO3.Observable.Time;
+using ModestTree.Zenject;
+using TheDarkNight.Observables.Time;
 using UnityEngine;
 
 namespace TheDarkNight.Installers {

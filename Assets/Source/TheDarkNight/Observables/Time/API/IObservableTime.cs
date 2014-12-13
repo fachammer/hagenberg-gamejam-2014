@@ -1,6 +1,6 @@
-﻿using UniRx;
+using UniRx;
 
-namespace PRO3.Observable.Time {
+namespace TheDarkNight.Observables.Time {
 
     public interface IObservableTime {
 

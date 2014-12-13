@@ -4,31 +4,27 @@ using TheDarkNight.Extensions;
 using UniRx;
 
 namespace TheDarkNight.Lights {
-    public class LightSwitch : MonoBehaviour, ISwitch {
+    public class GeneratorSwitch : MonoBehaviour, ISwitch {
 
         [SerializeField]
-        private LightSource lightSource;
-  
-        private bool turnedOn = false;        
+        private EnergyGenerator generator;
+
+        private bool turnedOn = true;
 
         public bool IsTurnedOn() {
             return turnedOn;
         }
 
         public void Toggle() {
-            if(!turnedOn && lightSource.CanTurnOn()) {
+            if(!turnedOn) {
+                generator.TurnOn();
                 turnedOn = true;
-                lightSource.TurnOn();                
-            }
-            else if(lightSource.CanTurnOff()) {
-                turnedOn = false;
-                lightSource.TurnOff();                
             }
         }
 
         private void OnTriggerEnter(Collider other) {
             ISwitcher switcher = other.GetClass<ISwitcher>();
-            
+
             if(switcher != null) {
                 switcher.CanToggleSwitch(this);
             }
@@ -42,7 +38,7 @@ namespace TheDarkNight.Lights {
         }
 
         private void Start() {
-            lightSource.TurnedOff.Subscribe(_ => turnedOn = false);
+            generator.Broke.Subscribe(_ => turnedOn = false);
         }
     }
 }
