@@ -1,15 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿namespace TheDarkNight.Movement {
 
-public class IMovement : MonoBehaviour {
+    public interface IMovement {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+        void MoveHorizontally(float movementScale);
+
+        void MoveDepth(float movementScale);
+    }
 }
