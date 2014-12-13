@@ -52,6 +52,10 @@ namespace TheDarkNight.Extensions {
             return components.MinSelect(c => Vector3.Distance(c.Position(), position));
         }
 
+        public static Vector3 GetNearestToPosition(this IEnumerable<Vector3> vectors, Vector3 position) {
+            return vectors.MinSelect(v => Vector3.Distance(v, position));
+        }
+
         public static IObservable<TResult> CombineLatestOnLeft<TLeft, TRight, TResult>(this IObservable<TLeft> leftSource, IObservable<TRight> rightSource, Func<TLeft, TRight, TResult> selector) {
             return leftSource
                 .Select<TLeft, Tuple<TLeft, int>>(Tuple.Create<TLeft, int>)
