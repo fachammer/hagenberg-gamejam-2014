@@ -4,7 +4,6 @@ using TheDarkNight.Picking;
 
 namespace TheDarkNight.FlashLight {
     public interface IBattery : IPickable {
-
-
+        float GetRemainingTime();
     }
 }

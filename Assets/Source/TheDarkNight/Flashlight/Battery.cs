@@ -9,5 +9,9 @@ namespace TheDarkNight.FlashLight {
         public Transform GetTransform() {
             return this.transform;
         }
+
+        public float GetRemainingTime() {
+            return runTimeSeconds;
+        }
     }
 }
