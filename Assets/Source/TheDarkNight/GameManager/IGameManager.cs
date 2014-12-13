@@ -1,15 +1,25 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using PRO3.Utility;
 
-public class IGameManager : MonoBehaviour {
+namespace TheDarkNight.GameManager {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public interface IGameManager {
+
+        ObservableProperty<bool> GameStarted { get; }
+
+        ObservableProperty<bool> GameEnded { get; }
+
+        ObservableProperty<bool> GameQuit { get; }
+
+        ObservableProperty<bool> GamePaused { get; }
+
+        void RestartGame();
+
+        void StartGame();
+
+        void EndGame();
+
+        void TogglePauseGame();
+
+        void QuitGame();
+    }
 }

@@ -1,15 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using UniRx;
 
-public class ITimeTracker : MonoBehaviour {
+namespace TheDarkNight.TimeTracking {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public interface ITimeTracker {
+
+        IObservable<float> TrackedTime { get; }
+    }
 }
