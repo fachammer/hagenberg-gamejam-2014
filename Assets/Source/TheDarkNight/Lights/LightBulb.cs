@@ -1,38 +1,38 @@
 using UnityEngine;
 using System.Collections;
+using System.Linq;
+using TheDarkNight.Extensions;
 
 namespace TheDarkNight.Lights {
     public class LightBulb : MonoBehaviour, ILightBulb {
+
         private Light pointLight;
-        private bool intact;
-
-        public bool TryTurnOn() {
-            if(intact && !pointLight.enabled) {
-                pointLight.enabled = true;
-                return true;
-            }
-            return false;
-        }
-
-        public bool TryTurnOff() {
-            if(intact && pointLight.enabled) {
-                pointLight.enabled = false;
-                return true;
-            }
-            return false;
-        }
+        private bool intact = true;
 
         public void Destroy() {
-            TryTurnOff();
+            if(CanTurnOff())
+                TurnOff();
             intact = false;
         }
 
         private void Start() {
-            pointLight = new Light();
-            pointLight.type = LightType.Point;
+            pointLight = this.TryGetComponentsInChildren<Light>().First();
+        }
+
+        public bool CanTurnOn() {
+            return (intact && !pointLight.enabled);
+        }
+
+        public bool CanTurnOff() {
+            return (intact && pointLight.enabled);
+        }
+
+        public void TurnOn() {
+            pointLight.enabled = true;
+        }
+
+        public void TurnOff() {
             pointLight.enabled = false;
-            pointLight.transform.parent = this.transform;
-            pointLight.transform.position = Vector3.zero;
         }
     }
 

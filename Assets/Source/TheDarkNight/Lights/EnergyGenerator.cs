@@ -8,33 +8,52 @@ using UniRx;
 namespace TheDarkNight.Lights {
     public class EnergyGenerator : MonoBehaviour, IEnergyGenerator {
         [SerializeField]
-        private ILightSource[] lightSources;
+        private LightSource[] lightSources;
+
+        public IObservable<Unit> Broke { get { return broke; } }
+        private ISubject<Unit> broke = new Subject<Unit>();
 
         [SerializeField]
         private int maxActiveLights;
 
-        private CompositeDisposable lightSubscriptions;
-        private bool running;
-        private int activeLights;
+        private bool turnedOn = true;
+        private int activeLights = 0;
 
-        private void Start() {            
-            lightSources
-                .Do(source => source
-                                .TurnedOn
-                                .Subscribe(ls => LightTurnedOn(ls))
-                                .AddTo(lightSubscriptions));
+        private void Start() {
+            lightSources.Do(source => source
+                                        .TurnedOn
+                                        .Subscribe(_ => LightTurnedOn()));
+            lightSources.Do(source => source
+                                        .TurnedOff
+                                        .Subscribe(_ => LightTurnedOff()));
         }
 
-        private void LightTurnedOn(ILightSource lightSource) {
+        private void LightTurnedOn() {
             activeLights++;
             if(activeLights > maxActiveLights) {
-                lightSources.Do(source => source.TryTurnOff());
+                broke.OnNext(Unit.Default);
+                lightSources.Do(source => {
+                    if(source.CanTurnOff()) {
+                        source.TurnOff();
+                    }
+                });
+                turnedOn = false;
             }
         }
 
+        private void LightTurnedOff() {
+            activeLights--;
+        }
+
         public void TurnOn() {
-            if(!running)
-                running = true;
+            if(!turnedOn) {
+                activeLights = 0;
+                turnedOn = true;
+            }
+        }
+
+        public bool IsTurnedOn() {
+            return turnedOn;
         }
     }
 

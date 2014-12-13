@@ -1,7 +1,9 @@
 namespace TheDarkNight.Lights {
     public interface ILightBulb {
-        bool TryTurnOn();
-        bool TryTurnOff();
+        bool CanTurnOn();
+        bool CanTurnOff();
+        void TurnOn();
+        void TurnOff();
         void Destroy();
     }
 }

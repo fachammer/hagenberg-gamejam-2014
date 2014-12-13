@@ -1,22 +1,38 @@
 using UnityEngine;
 using System.Collections;
 using TheDarkNight.Extensions;
+using UniRx;
 
 namespace TheDarkNight.Lights {
-    public class LightSwitch : ISwitch {
+    public class LightSwitch : MonoBehaviour, ISwitch {
 
-        private bool turnedOn;
+        [SerializeField]
+        private LightSource lightSource;
+  
+        private bool turnedOn = false;        
 
         public bool IsTurnedOn() {
             return turnedOn;
         }
 
         public void Toggle() {
-            turnedOn = !turnedOn;
+            if(!turnedOn) {
+                if(lightSource.CanTurnOn()) {
+                    turnedOn = true;
+                    lightSource.TurnOn();
+                }
+            }
+            else {
+                if(lightSource.CanTurnOff()) {
+                    turnedOn = false;
+                    lightSource.TurnOff();
+                }
+            }
         }
 
         private void OnTriggerEnter(Collider other) {
             ISwitcher switcher = other.GetClass<ISwitcher>();
+            
             if(switcher != null) {
                 switcher.CanToggleSwitch(this);
             }
@@ -27,6 +43,10 @@ namespace TheDarkNight.Lights {
             if(switcher != null) {
                 switcher.CannotToggleSwitch(this);
             }
+        }
+
+        private void Start() {
+            lightSource.TurnedOff.Subscribe(_ => turnedOn = false);
         }
     }
 }
