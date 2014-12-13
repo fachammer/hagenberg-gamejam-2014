@@ -3,7 +3,7 @@ using System.Collections;
 using UniRx;
 using ModestTree.Zenject;
 using TheDarkNight.Extensions;
-using TheDarkNight.Observable.Time;
+using TheDarkNight.Observables.Time;
 using System;
 
 
