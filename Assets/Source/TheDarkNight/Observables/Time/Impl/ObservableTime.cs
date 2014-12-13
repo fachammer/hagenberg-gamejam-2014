@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using UniRx;
 
-namespace PRO3.Observable.Time {
+namespace TheDarkNight.Observable.Time {
 
     public static class TimeUtils {
 

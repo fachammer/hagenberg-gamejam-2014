@@ -3,16 +3,30 @@ using System.Collections;
 using TheDarkNight.Extensions;
 
 namespace TheDarkNight.Lights {
-    public class LightSwitch : MonoBehaviour {
+    public class LightSwitch : ISwitch {
 
-        // Use this for initialization
-        void Start() {
-            this.GetClass<ILight>();
+        private bool turnedOn;
+
+        public bool IsTurnedOn() {
+            return turnedOn;
         }
 
-        // Update is called once per frame
-        void Update() {
+        public void Toggle() {
+            turnedOn = !turnedOn;
+        }
 
+        private void OnTriggerEnter(Collider other) {
+            ISwitcher switcher = other.GetClass<ISwitcher>();
+            if(switcher != null) {
+                switcher.CanToggleSwitch(this);
+            }
+        }
+
+        private void OnTriggerExit(Collider other) {
+            ISwitcher switcher = other.GetClass<ISwitcher>();
+            if(switcher != null) {
+                switcher.CannotToggleSwitch(this);
+            }
         }
     }
 }
