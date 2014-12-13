@@ -47,7 +47,10 @@ namespace TheDarkNight.Movement {
         }
 
         private bool IsObstacleInDepthDirection(float direction) {
-            return Physics.Raycast(rigidbody.position, new Vector3(0, 0, direction), settings.depthLayerWidth, settings.depthCollisionLayers);
+            float collisionRadius = rigidbody.collider.bounds.size.magnitude / 2;
+            float collisionDistance = settings.depthLayerWidth + rigidbody.collider.bounds.size.z / 2;
+            RaycastHit hit;
+            return Physics.SphereCast(rigidbody.position, collisionRadius, new Vector3(0, 0, direction), out hit, collisionDistance, settings.depthCollisionLayers);
         }
 
         private bool IsPlayerMovingInDepth() {
@@ -81,8 +84,8 @@ namespace TheDarkNight.Movement {
 
         [Serializable]
         public class Settings {
-            public float maxHorizontalSpeed = 10;
-            public float depthMovementForce = 10;
+            public float maxHorizontalSpeed = 5;
+            public float depthMovementForce = 1000;
             public float maxDepthMovementSpeed = 10;
 
             [Range(0, 10)]

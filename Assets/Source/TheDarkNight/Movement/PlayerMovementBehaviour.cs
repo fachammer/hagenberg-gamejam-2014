@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace TheDarkNight.Movement {
 
+    [RequireComponent(typeof(Collider))]
     [RequireComponent(typeof(Rigidbody))]
     internal class PlayerMovementBehaviour : MonoBehaviour, IMovement {
         public PlayerMovement.Settings movementSettings;
