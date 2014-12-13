@@ -36,14 +36,13 @@ namespace TheDarkNight.FlashLight {
             return false;
         }
 
-        private void Update() {
-            if(Input.GetKeyUp(KeyCode.Space)) {
-                if(turnedOn)
-                    TryTurnOff();
-                else
-                    TryTurnOn();
+        public void Toggle() {
+            if(!TryTurnOff()) {
+                TryTurnOn();
             }
+        }
 
+        private void Update() {
             if(turnedOn) {
                 batteryInUse.DecreaseBatteryTime(Time.deltaTime);
                 if(batteryInUse.GetRemainingTime() <= 0) {

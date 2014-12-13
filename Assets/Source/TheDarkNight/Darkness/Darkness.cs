@@ -49,12 +49,8 @@ namespace TheDarkNight.Darkness {
         }
 
         private void Start() {
-            Time.Once(startWaitSeconds).Subscribe(_ => {
-                nextRoomEntry = startingEntry;
-                nextRoom = nextRoomEntry.GetComponentInParent<Room>();
-                lastPos = transform.position;
-                updateSubscription = Time.ElapsedIntervals(1 / updateFrequency).Subscribe(__ => Move());
-            });
+            if(Time != null)
+                OnEnable();
         }
 
         private void Move() {
@@ -95,12 +91,25 @@ namespace TheDarkNight.Darkness {
             Destroy(this.gameObject);
         }
 
-        public void Hide() {
-            this.gameObject.SetActive(false);
+        public void ToggleHidden() {
+            this.gameObject.SetActive(!this.gameObject.activeInHierarchy);
         }
 
         private void OnDestroy() {
             updateSubscription.Dispose();
+        }
+
+        private void OnDisable() {
+            updateSubscription.Dispose();
+        }
+
+        private void OnEnable() {
+            Time.Once(startWaitSeconds).Subscribe(_ => {
+                nextRoomEntry = startingEntry;
+                nextRoom = nextRoomEntry.GetComponentInParent<Room>();
+                lastPos = transform.position;
+                updateSubscription = Time.ElapsedIntervals(1 / updateFrequency).Subscribe(__ => Move());
+            });
         }
     }
 }

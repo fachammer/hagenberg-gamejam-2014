@@ -6,7 +6,7 @@ namespace TheDarkNight.Rooms {
 
     public interface IRoom {
         IEnumerable<Transform> GetAdjacentRoomsEntries();
-
+        void ClearDarkness();
     }
 
 

@@ -6,7 +6,7 @@ using TheDarkNight.Rooms;
 namespace TheDarkNight.Darkness {
 
     public interface IDarkness {
-        void Hide();
+        void ToggleHidden();
         void Die();
         void SetValues(Transform startingEntry);
     }
