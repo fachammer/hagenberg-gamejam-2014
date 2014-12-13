@@ -13,8 +13,8 @@ namespace TheDarkNight.Darkness {
 
     public class Darkness : MonoBehaviour, IDarkness {
         private IDisposable updateSubscription = Disposable.Empty;
-        public Transform nextRoomEntry;
-        public Room nextRoom;
+        private Transform nextRoomEntry;
+        private Room nextRoom;
         private Vector3 lastPos;
 
         [SerializeField]
@@ -60,7 +60,7 @@ namespace TheDarkNight.Darkness {
         private void Move() {
             if(Vector3.Distance(transform.position, lastPos) > instantiateDistance) {
                 lastPos = transform.position;
-                Instantiate(darknessDummyPrefab, this.transform.position, this.transform.rotation);
+                Instantiate(darknessDummyPrefab, this.transform.position, Quaternion.Euler(new Vector3(0,0,90)));
             }
 
             transform.position = Vector3.MoveTowards(transform.position, nextRoomEntry.position, UnityEngine.Random.Range(maxSpeed, minSpeed));
