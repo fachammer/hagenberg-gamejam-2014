@@ -1,15 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using UniRx;
 
-public class IKillable : MonoBehaviour {
+namespace TheDarkNight.Darkness {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public interface IKillable {
+
+        IObservable<Unit> Killed { get; }
+    }
 }
