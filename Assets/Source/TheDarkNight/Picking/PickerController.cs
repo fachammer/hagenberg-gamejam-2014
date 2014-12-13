@@ -1,27 +1,26 @@
-using UnityEngine;
-using System.Collections;
-using System;
-using UniRx;
-using TheDarkNight.Observables.Input;
 using TheDarkNight.Extensions;
+using TheDarkNight.Observables.Input;
+using UniRx;
+using UnityEngine;
 
 namespace TheDarkNight.Picking {
 
+    [RequireComponent(typeof(IPicker))]
+    [RequireComponent(typeof(IAxesManager))]
     public class PickerController : MonoBehaviour {
 
         [SerializeField]
         private string PickupAxisName;
 
         private void Start() {
-            AxesManager axesManager = this.TryGetClass<AxesManager>();
-            IObservableAxis pickUpAxes = axesManager.GetAxis(PickupAxisName);
-            pickUpAxes.DistinctUntilChanged().Subscribe(TryPickUp);
+            IAxesManager axesManager = this.TryGetClass<IAxesManager>();
+            IObservableAxis pickUpAxis = axesManager.GetAxis(PickupAxisName);
+            pickUpAxis.DistinctUntilChanged().Subscribe(TryPickUp);
         }
 
         private void TryPickUp(float value) {
             if(value > 0)
-                GetComponent<Picker>().PickUpPickable();
+                this.TryGetClass<IPicker>().PickUpPickable();
         }
     }
-
 }
