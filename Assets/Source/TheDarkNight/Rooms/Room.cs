@@ -23,7 +23,7 @@ namespace TheDarkNight.Rooms {
         }
         
         private void Start() {
-            //lightSource.TurnedOn.Subscribe(_ => { enlightened = true; possessed = false; });      //TODO UNCOMMENT
+            lightSource.TurnedOn.Subscribe(_ => { enlightened = true; possessed = false; });
         }
     }
 }
