@@ -1,15 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class IInventory : MonoBehaviour {
+namespace TheDarkNight.Picking {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public interface IInventory {
+        bool AddItem(IPickable pickable);
+        bool RemoveItem(IPickable pickable);       
+    }
+
 }

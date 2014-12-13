@@ -1,15 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using UniRx;
 
-public class IPickable : MonoBehaviour {
+namespace TheDarkNight.Picking{
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public interface IPickable {
+        Transform GetTransform();
+    }
 }
