@@ -13,5 +13,9 @@ namespace TheDarkNight.FlashLight {
         public float GetRemainingTime() {
             return runTimeSeconds;
         }
+
+        public void DecreaseBatteryTime(float time) {
+            runTimeSeconds -= time;
+        }
     }
 }
