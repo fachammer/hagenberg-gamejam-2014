@@ -39,16 +39,18 @@ namespace TheDarkNight.GameManager {
         }
 
         public void QuitGame() {
-            if(gamePaused || !gameStarted)
+            if(gamePaused || !gameStarted || gameEnded)
                 gameQuit.Value = true;
         }
 
         public void RestartGame() {
-            if(gamePaused)
+            if(gamePaused || gameEnded) {
                 Application.LoadLevel(0);
+            }
         }
 
         private void Start() {
+            UnityEngine.Time.timeScale = 1;
             gameStarted.Value = false;
         }
     }

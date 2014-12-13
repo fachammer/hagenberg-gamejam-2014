@@ -1,5 +1,4 @@
-﻿using System;
-using TheDarkNight.Extensions;
+﻿using TheDarkNight.Extensions;
 using UniRx;
 using UnityEngine;
 
@@ -9,15 +8,16 @@ namespace TheDarkNight.GameManager {
     public class GamePauser : MonoBehaviour {
         private IGameManager gameManager;
 
-        private IDisposable gameManagerSubscription = Disposable.Empty;
+        private CompositeDisposable gameManagerSubscriptions = new CompositeDisposable();
 
         private void Start() {
             gameManager = this.TryGetClass<IGameManager>();
-            gameManagerSubscription = gameManager.GamePaused.Subscribe(paused => UnityEngine.Time.timeScale = paused ? 0 : 1);
+            gameManager.GameEnded.Subscribe(ended => UnityEngine.Time.timeScale = ended ? 0 : 1).AddTo(gameManagerSubscriptions);
+            gameManager.GamePaused.Subscribe(paused => UnityEngine.Time.timeScale = paused ? 0 : 1).AddTo(gameManagerSubscriptions);
         }
 
         private void OnDisable() {
-            gameManagerSubscription.Dispose();
+            gameManagerSubscriptions.Clear();
         }
     }
 }
