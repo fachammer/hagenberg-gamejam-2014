@@ -12,30 +12,35 @@ namespace TheDarkNight.Picking {
         [SerializeField]
         private int maxLightBulbs = 1;
 
-        private List<IBattery> batteries = new List<IBattery>();
-        private List<ILightBulb> lightBulbs = new List<ILightBulb>();
+        private List<GameObject> batteries = new List<GameObject>();
+        private List<GameObject> lightBulbs = new List<GameObject>();
 
-        private int batteryCount = 0;
-        private int lightBulbsCount = 0;
-
-        public bool AddPickable(IPickable pickable) {
-            if(pickable is ILightBulb && lightBulbsCount < maxLightBulbs) {
-                lightBulbs.Add(pickable as ILightBulb);
+        public bool AddItem(GameObject pickable) {
+            if(pickable.GetComponent<LightBulb>() != null && lightBulbs.Count < maxLightBulbs) {
+                lightBulbs.Add(pickable);
                 return true;
             }
-            else if(pickable is IBattery && batteryCount < maxBatteries) {
-                batteries.Add(pickable as IBattery);
+            else if(pickable.GetComponent<Battery>() != null && batteries.Count < maxBatteries) {
+                batteries.Add(pickable);
                 return true;
             }
             return false;
         }
 
-        public bool RemovePickable(IPickable pickable) {
-            if(pickable is ILightBulb) {
-                return lightBulbs.Remove(pickable as ILightBulb);
+        public bool RemoveItem(GameObject pickable) {
+            if(pickable.GetComponent<LightBulb>() != null) {
+                if(lightBulbs.Remove(pickable)){
+                    Destroy(pickable.gameObject);
+                    return true;
+                }
+                return false;
             }
-            else if(pickable is IBattery) {
-                return batteries.Remove(pickable as IBattery);
+            else if(pickable.GetComponent<Battery>() != null) {
+                if(batteries.Remove(pickable)) {
+                    Destroy(pickable.gameObject);
+                    return true;
+                }
+                return false;
             }
             return false;
         }
