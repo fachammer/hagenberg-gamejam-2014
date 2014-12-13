@@ -43,6 +43,13 @@ namespace TheDarkNight.FlashLight {
         }
 
         private void Update() {
+            if(Input.GetKeyUp(KeyCode.Space)) {
+                if(turnedOn)
+                    TryTurnOff();
+                else
+                    TryTurnOn();
+            }
+
             if(turnedOn) {
                 batteryInUse.DecreaseBatteryTime(Time.deltaTime);
                 if(batteryInUse.GetRemainingTime() <= 0) {
@@ -77,7 +84,7 @@ namespace TheDarkNight.FlashLight {
             Light light = this.TryGetComponent<Light>();
             light.enabled = lightEnabled;
             GetComponentsInChildren<MeshRenderer>().First().enabled = lightEnabled;
-            GetComponentsInChildren<DarknessHider>().First().enabled = lightEnabled;
+            GetComponentsInChildren<DarknessHider>().First().collider.enabled = lightEnabled;
         }
     }
 }

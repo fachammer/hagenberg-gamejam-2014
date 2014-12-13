@@ -47,12 +47,6 @@ namespace TheDarkNight.Darkness {
         public void SetValues(Transform startingEntry) {
             this.startingEntry = startingEntry;
         }
-
-        private void Start() {
-            if(Time != null)
-                OnEnable();
-        }
-
         private void Move() {
             if(Vector3.Distance(transform.position, lastPos) > instantiateDistance) {
                 lastPos = transform.position;
@@ -91,8 +85,9 @@ namespace TheDarkNight.Darkness {
             Destroy(this.gameObject);
         }
 
-        public void ToggleHidden() {
-            this.gameObject.SetActive(!this.gameObject.activeInHierarchy);
+        public void SetHidden(bool hidden) {
+            this.enabled = !hidden;
+            this.GetComponent<MeshRenderer>().enabled = !hidden;
         }
 
         private void OnDestroy() {
@@ -103,7 +98,7 @@ namespace TheDarkNight.Darkness {
             updateSubscription.Dispose();
         }
 
-        private void OnEnable() {
+        private void Start() {
             Time.Once(startWaitSeconds).Subscribe(_ => {
                 nextRoomEntry = startingEntry;
                 nextRoom = nextRoomEntry.GetComponentInParent<Room>();
