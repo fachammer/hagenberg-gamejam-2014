@@ -105,5 +105,16 @@ namespace TheDarkNight.Extensions {
             if(obj == null)
                 throw new MissingComponentException(exceptionMessage);
         }
+
+        public static T GetClass<T>(this Component component) where T : class {
+            return component.GetComponent(typeof(T)) as T;
+        }
+
+        public static T TryGetClass<T>(this Component component) where T : class {
+            T tryComponent = GetClass<T>(component);
+            ThrowMissingComponentExceptionIfNull(tryComponent, "Component " + component + " is trying to access Component " + typeof(T).FullName + ", but it is missing");
+
+            return tryComponent;
+        }
     }
 }

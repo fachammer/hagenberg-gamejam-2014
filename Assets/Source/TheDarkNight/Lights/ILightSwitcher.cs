@@ -1,15 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+namespace TheDarkNight.Lights {
 
-public class ILightSwitcher : MonoBehaviour {
+    public interface ILightSwitcher {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
 }

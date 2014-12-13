@@ -1,15 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
+namespace TheDarkNight.Lights {
 
-public class IEnergyGenerator : MonoBehaviour {
+    public interface IEnergyGenerator {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    }
+
 }
