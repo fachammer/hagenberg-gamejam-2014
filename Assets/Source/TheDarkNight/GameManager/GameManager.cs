@@ -47,5 +47,9 @@ namespace TheDarkNight.GameManager {
             if(gamePaused)
                 Application.LoadLevel(0);
         }
+
+        private void Start() {
+            gameStarted.Value = false;
+        }
     }
 }
