@@ -22,13 +22,18 @@ namespace TheDarkNight.Lights {
         private void Start() {
             lightSources.Do(source => source
                                         .TurnedOn
-                                        .Subscribe(_ => LightTurnedOn()));
+                                        .Subscribe(LightTurnedOn));
             lightSources.Do(source => source
                                         .TurnedOff
                                         .Subscribe(_ => LightTurnedOff()));
         }
 
-        private void LightTurnedOn() {
+        private void LightTurnedOn(ILightSource lightSource) {
+            if(!turnedOn) {
+                lightSource.TurnOff();
+                return;
+            }
+
             activeLights++;
             if(activeLights > maxActiveLights) {
                 broke.OnNext(Unit.Default);

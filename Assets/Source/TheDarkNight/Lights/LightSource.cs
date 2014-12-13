@@ -5,20 +5,16 @@ using UniRx;
 namespace TheDarkNight.Lights {
     public class LightSource : MonoBehaviour, ILightSource {
 
-        [SerializeField]
-        private EnergyGenerator generator;
-        public IObservable<Unit> TurnedOn { get { return turnOn; } }
-        private ISubject<Unit> turnOn = new Subject<Unit>();
+        public IObservable<ILightSource> TurnedOn { get { return turnOn; } }
+        private ISubject<ILightSource> turnOn = new Subject<ILightSource>();
 
-        public IObservable<Unit> TurnedOff { get { return turnOff; } }
-        private ISubject<Unit> turnOff = new Subject<Unit>();
-
-
-        [SerializeField]
-        private LightBulb lightBulb;  //TODO SET TO ILightBulb
+        public IObservable<ILightSource> TurnedOff { get { return turnOff; } }
+        private ISubject<ILightSource> turnOff = new Subject<ILightSource>();
+        
+        private ILightBulb lightBulb;
 
         public bool CanTurnOn() {
-            return (lightBulb != null && generator.IsTurnedOn() && lightBulb.CanTurnOn());
+            return (lightBulb != null && lightBulb.CanTurnOn());
         }
 
         public bool CanTurnOff() {
@@ -27,17 +23,17 @@ namespace TheDarkNight.Lights {
 
         public void TurnOn() {
             lightBulb.TurnOn();
-            turnOn.OnNext(Unit.Default);
+            turnOn.OnNext(this);
         }
 
         public void TurnOff() {
             lightBulb.TurnOff();
-            turnOff.OnNext(Unit.Default);
+            turnOff.OnNext(this);
         }
 
         public bool TryInsertLightBulb(ILightBulb lightBulb) {  
             if(lightBulb == null) {
-                //this.lightBulb = lightBulb;               TODO UNCOMMENT
+                this.lightBulb = lightBulb;
                 return true;
             }
             return false;

@@ -7,6 +7,6 @@ namespace TheDarkNight.Lights {
         void TurnOn();
         void TurnOff();
         bool TryInsertLightBulb(ILightBulb lightBulb);
-        IObservable<Unit> TurnedOn { get; }
+        IObservable<ILightSource> TurnedOn { get; }
     }
 }

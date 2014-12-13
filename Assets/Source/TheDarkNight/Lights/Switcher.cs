@@ -10,7 +10,7 @@ namespace TheDarkNight.Lights {
         public void CanToggleSwitch(ISwitch targetSwitch) {
             canToggleSwitch = true;            
             this.targetSwitch = targetSwitch;
-            ToggleSwitch(); //TODO REMOVE
+            ToggleSwitch();
         }
 
         public void CannotToggleSwitch(ISwitch targetSwitch) {
