@@ -3,9 +3,7 @@ using System.Collections;
 
 namespace TheDarkNight.Lights {
     public class LightBulb : MonoBehaviour, ILightBulb {
-        [SerializeField]
         private Light pointLight;
-
         private bool intact;
 
         public bool TryTurnOn() {
@@ -27,6 +25,14 @@ namespace TheDarkNight.Lights {
         public void Destroy() {
             TryTurnOff();
             intact = false;
+        }
+
+        private void Start() {
+            pointLight = new Light();
+            pointLight.type = LightType.Point;
+            pointLight.enabled = false;
+            pointLight.transform.parent = this.transform;
+            pointLight.transform.position = Vector3.zero;
         }
     }
 

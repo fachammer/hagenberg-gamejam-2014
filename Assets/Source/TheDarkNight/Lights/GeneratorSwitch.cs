@@ -3,13 +3,16 @@ using System.Collections;
 
 namespace TheDarkNight.Lights {
     public class GeneratorSwitch : ISwitch {
-        
+
+        private bool turnedOn;
+
         public bool IsTurnedOn() {
-            throw new System.NotImplementedException();
+            return turnedOn;
         }
 
         public void Toggle() {
-            throw new System.NotImplementedException();
+            if(!turnedOn)
+                turnedOn = true;
         }
     }
 }
