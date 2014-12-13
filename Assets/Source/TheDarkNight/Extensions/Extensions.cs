@@ -114,6 +114,10 @@ namespace TheDarkNight.Extensions {
             return component.GetComponent(typeof(T)) as T;
         }
 
+        public static T GetClassInParent<T>(this Component component) where T : class {
+            return component.GetComponentInParent(typeof(T)) as T;
+        }
+
         public static IEnumerable<T> GetClasses<T>(this Component component) where T : class {
             Component[] components = component.GetComponents(typeof(T));
             return components.Select(c => c as T);
@@ -122,6 +126,13 @@ namespace TheDarkNight.Extensions {
         public static T TryGetClass<T>(this Component component) where T : class {
             T tryComponent = GetClass<T>(component);
             ThrowMissingComponentExceptionIfNull(tryComponent, "Component " + component + " is trying to access Component " + typeof(T).FullName + ", but it is missing");
+
+            return tryComponent;
+        }
+
+        public static T TryGetClassInParent<T>(this Component component) where T : class {
+            T tryComponent = component.GetClassInParent<T>();
+            ThrowMissingComponentExceptionIfNull(tryComponent, "Component " + component + " is trying to access Component " + typeof(T).FullName + " in one of its ancestors, but it is missing");
 
             return tryComponent;
         }
