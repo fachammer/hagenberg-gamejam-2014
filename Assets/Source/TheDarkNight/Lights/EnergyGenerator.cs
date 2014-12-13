@@ -20,12 +20,12 @@ namespace TheDarkNight.Lights {
         private int activeLights = 0;
 
         private void Start() {
-            lightSources.Do(source => source
-                                        .TurnedOn
-                                        .Subscribe(LightTurnedOn));
-            lightSources.Do(source => source
-                                        .TurnedOff
-                                        .Subscribe(_ => LightTurnedOff()));
+            lightSources.Do(SubscribeToLightSource);
+        }
+
+        private void SubscribeToLightSource(ILightSource lightSource) {
+            lightSource.TurnedOn.Subscribe(LightTurnedOn);
+            lightSource.TurnedOff.Subscribe(_ => LightTurnedOff());
         }
 
         private void LightTurnedOn(ILightSource lightSource) {
