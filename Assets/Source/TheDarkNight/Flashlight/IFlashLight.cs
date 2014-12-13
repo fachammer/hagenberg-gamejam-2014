@@ -1,15 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class IFlashLight : MonoBehaviour {
+namespace TheDarkNight.FlashLight {
+    public interface IFlashLight {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
 }

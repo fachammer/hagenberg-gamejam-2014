@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using TheDarkNight.Lights;
@@ -12,8 +13,8 @@ namespace TheDarkNight.Picking {
         [SerializeField]
         private int maxLightBulbs = 1;
 
-        private List<IBattery> batteries = new List<IBattery>();
-        private List<ILightBulb> lightBulbs = new List<ILightBulb>();
+        private List<IPickable> batteries = new List<IPickable>();
+        private List<IPickable> lightBulbs = new List<IPickable>();
 
         public bool AddItem(IPickable pickable) {
             if(pickable is ILightBulb && lightBulbs.Count < maxLightBulbs) {
@@ -43,6 +44,11 @@ namespace TheDarkNight.Picking {
                 return false;
             }
             return false;
+        }
+
+
+        public IEnumerable<IPickable> GetItems() {
+            return batteries.Concat(lightBulbs);
         }
     }
 

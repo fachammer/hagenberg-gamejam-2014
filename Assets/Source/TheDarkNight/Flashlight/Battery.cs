@@ -1,10 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
-public class Battery : MonoBehaviour, IBattery {
+namespace TheDarkNight.FlashLight {
+    public class Battery : MonoBehaviour, IBattery {
 
 
-    public Transform GetTransform() {
-        return this.transform;
+        public Transform GetTransform() {
+            return this.transform;
+        }
     }
 }
