@@ -1,7 +1,7 @@
-﻿using UniRx;
+using UniRx;
 using UnityEngine;
 
-namespace PRO3.Utility {
+namespace TheDarkNight.Utility {
 
     public static class Logging {
 

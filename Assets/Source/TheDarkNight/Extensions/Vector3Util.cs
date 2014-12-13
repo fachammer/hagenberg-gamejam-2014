@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace PRO3.Utility {
+namespace TheDarkNight.Utility {
     public static class Vector3Util {
 
         public static bool PositionsInRange(Vector3 position1, Vector3 position2, Vector3 coefficientsUsed, float distance = 0.5f) {

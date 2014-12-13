@@ -1,15 +1,14 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using TheDarkNight.Rooms;
 
-public class IDarkness : MonoBehaviour {
+namespace TheDarkNight.Darkness {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public interface IDarkness {
+        void Hide();
+        void Die();        
+        void SetValues(Room startingRoom);
+    }
+
 }
