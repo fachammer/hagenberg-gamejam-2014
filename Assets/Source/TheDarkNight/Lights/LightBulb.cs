@@ -20,11 +20,11 @@ namespace TheDarkNight.Lights {
         }
 
         public bool CanTurnOn() {
-            return (intact && !pointLight.enabled);
+            return intact && !pointLight.enabled;
         }
 
         public bool CanTurnOff() {
-            return (intact && pointLight.enabled);
+            return intact && pointLight.enabled;
         }
 
         public void TurnOn() {

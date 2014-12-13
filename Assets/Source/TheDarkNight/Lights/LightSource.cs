@@ -14,11 +14,11 @@ namespace TheDarkNight.Lights {
         private ILightBulb lightBulb;
 
         public bool CanTurnOn() {
-            return (lightBulb != null && lightBulb.CanTurnOn());
+            return lightBulb != null && lightBulb.CanTurnOn();
         }
 
         public bool CanTurnOff() {
-            return (lightBulb != null && lightBulb.CanTurnOff());
+            return lightBulb != null && lightBulb.CanTurnOff();
         }
 
         public void TurnOn() {
