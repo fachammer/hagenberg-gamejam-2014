@@ -1,5 +1,4 @@
 ﻿using ModestTree.Zenject;
-using PRO3.Utility;
 using TheDarkNight.Extensions;
 using TheDarkNight.Observables.Time;
 using UniRx;
@@ -31,7 +30,9 @@ namespace TheDarkNight.GameManager {
             Image image = this.TryGetComponent<Image>();
             fader = new ImageFader(image, fadeResolution);
 
-            gameManager.GameStarted.DebugLog("game started {0}").Where(s => !s).Subscribe(_ => fader.FadeToColor(Time, fadeToColorAtBeginning, colorFadeAnimation));
+            gameManager.GameStarted
+                .Where(s => !s)
+                .Subscribe(_ => fader.FadeToColor(Time, fadeToColorAtBeginning, colorFadeAnimation));
         }
     }
 }
