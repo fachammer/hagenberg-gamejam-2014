@@ -5,21 +5,19 @@ namespace TheDarkNight.Lights {
     public class Switcher : MonoBehaviour, ISwitcher {
                 
         private ISwitch targetSwitch;
-        private bool canToggleSwitch = false;
 
-        public void CanToggleSwitch(ISwitch targetSwitch) {
-            canToggleSwitch = true;            
+        public void CanToggleSwitch(ISwitch targetSwitch) { 
             this.targetSwitch = targetSwitch;
+            ToggleSwitch();     //TODO REMOVE
         }
 
-        public void CannotToggleSwitch(ISwitch targetSwitch) {
-            canToggleSwitch = false;
-            this.targetSwitch = targetSwitch;
+        public void CannotToggleSwitch() {
+            this.targetSwitch = null;
         }
 
         public bool ToggleSwitch() {
-            if(canToggleSwitch) {
-                targetSwitch.Toggle();
+            if(this.targetSwitch != null) {
+                this.targetSwitch.Toggle();
                 return true;
             }
             return false;

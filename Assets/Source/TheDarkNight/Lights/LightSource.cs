@@ -14,7 +14,8 @@ namespace TheDarkNight.Lights {
         public IObservable<ILightSource> TurnedOff { get { return turnOff; } }
         private ISubject<ILightSource> turnOff = new Subject<ILightSource>();
         
-        private ILightBulb lightBulb;
+        [SerializeField]
+        private LightBulb lightBulb;        //TODO ILightBulb, REMOVE SERIALIZEFIELD
 
         public bool CanTurnOn() {
             return lightBulb != null && lightBulb.CanTurnOn();
@@ -36,7 +37,7 @@ namespace TheDarkNight.Lights {
 
         public bool TryInsertLightBulb(ILightBulb lightBulb) {  
             if(lightBulb == null) {
-                this.lightBulb = lightBulb;
+                //this.lightBulb = lightBulb;       //TODO UNCOMMENT
                 newBulb.OnNext(lightBulb);
                 return true;
             }

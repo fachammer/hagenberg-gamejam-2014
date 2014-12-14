@@ -11,6 +11,7 @@ using System.Collections.Generic;
 
 namespace TheDarkNight.Darkness {
 
+    [RequireComponent(typeof(Rigidbody))]
     public class Darkness : MonoBehaviour, IDarkness {
         private IDisposable updateSubscription = Disposable.Empty;
         private Transform nextRoomEntry;

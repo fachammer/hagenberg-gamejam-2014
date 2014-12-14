@@ -25,25 +25,30 @@ namespace TheDarkNight.Rooms {
         }
         
         private void Start() {
-            lightSource.TurnedOn.Subscribe(_ => { enlightened = true; possessed = false; });
+            lightSource.TurnedOn.Subscribe(_ => enlightened = true);
+            lightSource.TurnedOff.Subscribe(_ => enlightened = false);
         }
 
 
         private void OnTriggerEnter(Collider other) {
+            Debug.Log("Trigger enter: " + other);
             if(other.GetComponent<Darkness.Darkness>() != null) {
                 darknessInTrigger.Add(other.GetComponent<Darkness.Darkness>());
             }
         }
 
         private void OnTriggerStay(Collider other) {
+            Debug.Log("Trigger stay: " + other);
             if(other.GetComponent<Darkness.Darkness>() != null) {
                 darknessInTrigger.Add(other.GetComponent<Darkness.Darkness>());
             }
         }
 
         public void ClearDarkness() {
+            Debug.Log("CLEARING " + darknessInTrigger.Count() + " DARKNESS!");
             darknessInTrigger.Do(d => d.Die());
             darknessInTrigger.Clear();
+            possessed = false;
         }
     }
 }

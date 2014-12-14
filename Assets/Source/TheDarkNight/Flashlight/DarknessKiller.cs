@@ -9,7 +9,7 @@ using UniRx;
 namespace TheDarkNight.Lights {
     public class DarknessKiller : MonoBehaviour {
 
-        private void Start() {
+        public void Activate() {
             GetComponentInParent<Room>().ClearDarkness();
         }
     }
