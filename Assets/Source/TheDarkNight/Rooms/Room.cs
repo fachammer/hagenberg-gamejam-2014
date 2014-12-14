@@ -1,20 +1,20 @@
-using UnityEngine;
-using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using TheDarkNight.Extensions;
 using TheDarkNight.Lights;
 using UniRx;
+using UnityEngine;
 
 namespace TheDarkNight.Rooms {
 
     [RequireComponent(typeof(Collider))]
     public class Room : MonoBehaviour, IRoom {
+        public bool enlightened = false;
+
+        public bool possessed = false;
+
         [SerializeField]
         private LightSource lightSource;
 
-        public bool enlightened = false;
-        public bool possessed = false;
         private HashSet<Darkness.Darkness> darknessInTrigger = new HashSet<Darkness.Darkness>();
 
         [SerializeField]
@@ -23,12 +23,18 @@ namespace TheDarkNight.Rooms {
         public IEnumerable<Transform> GetAdjacentRoomsEntries() {
             return adjacentRoomsEntries;
         }
-        
+
+        public void ClearDarkness() {
+            darknessInTrigger.Do(d => d.Die());
+            darknessInTrigger.Clear();
+            possessed = false;
+        }
+
         private void Start() {
+            collider.isTrigger = true;
             lightSource.TurnedOn.Subscribe(_ => enlightened = true);
             lightSource.TurnedOff.Subscribe(_ => enlightened = false);
         }
-
 
         private void OnTriggerEnter(Collider other) {
             if(other.GetComponent<Darkness.Darkness>() != null) {
@@ -40,12 +46,6 @@ namespace TheDarkNight.Rooms {
             if(other.GetComponent<Darkness.Darkness>() != null) {
                 darknessInTrigger.Add(other.GetComponent<Darkness.Darkness>());
             }
-        }
-
-        public void ClearDarkness() {
-            darknessInTrigger.Do(d => d.Die());
-            darknessInTrigger.Clear();
-            possessed = false;
         }
     }
 }

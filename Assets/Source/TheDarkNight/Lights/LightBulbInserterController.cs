@@ -13,6 +13,9 @@ namespace TheDarkNight.Lights {
         [SerializeField]
         private string insertAxisName;
 
+        [SerializeField]
+        private string insertJoystickAxisName;
+
         private IAxesManager axesManager;
 
         private void Awake() {
@@ -22,7 +25,11 @@ namespace TheDarkNight.Lights {
 
         private void Start() {
             IObservableAxis insertAxis = axesManager.GetAxis(insertAxisName);
-            insertAxis.Subscribe(HandleInsertAxis);
+            IObservableAxis insertAxisJoystick = axesManager.GetAxis(insertJoystickAxisName);
+            if(Input.GetJoystickNames().Length < 2)
+                insertAxis.DistinctUntilChanged().Subscribe(HandleInsertAxis);
+            else
+                insertAxisJoystick.DistinctUntilChanged().Subscribe(HandleInsertAxis);
         }
 
         private void HandleInsertAxis(float axisValue) {

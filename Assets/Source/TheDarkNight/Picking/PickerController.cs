@@ -12,10 +12,18 @@ namespace TheDarkNight.Picking {
         [SerializeField]
         private string PickupAxisName;
 
+        [SerializeField]
+        private string pickupJoystickAxisName;
+
         private void Start() {
             IAxesManager axesManager = this.TryGetClass<IAxesManager>();
             IObservableAxis pickUpAxis = axesManager.GetAxis(PickupAxisName);
-            pickUpAxis.DistinctUntilChanged().Subscribe(TryPickUp);
+
+            IObservableAxis pickUpAxisJoystick = axesManager.GetAxis(pickupJoystickAxisName);
+            if(Input.GetJoystickNames().Length < 2)
+                pickUpAxis.DistinctUntilChanged().Subscribe(TryPickUp);
+            else
+                pickUpAxisJoystick.DistinctUntilChanged().Subscribe(TryPickUp);
         }
 
         private void TryPickUp(float value) {

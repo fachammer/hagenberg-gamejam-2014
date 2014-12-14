@@ -3421,8 +3421,8 @@ ModelImporter:
     - serializedVersion: 16
       name: bulbInsert
       takeName: Take 001
-      firstFrame: 780
-      lastFrame: 840
+      firstFrame: 840
+      lastFrame: 900
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -3670,8 +3670,8 @@ ModelImporter:
     - serializedVersion: 16
       name: bulbRun
       takeName: Take 001
-      firstFrame: 850
-      lastFrame: 870
+      firstFrame: 790
+      lastFrame: 810
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

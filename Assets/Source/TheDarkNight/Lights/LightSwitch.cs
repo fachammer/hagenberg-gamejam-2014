@@ -1,15 +1,16 @@
-using UnityEngine;
-using System.Collections;
 using TheDarkNight.Extensions;
 using UniRx;
+using UnityEngine;
 
 namespace TheDarkNight.Lights {
+
+    [RequireComponent(typeof(Collider))]
     public class LightSwitch : MonoBehaviour, ISwitch {
 
         [SerializeField]
         private LightSource lightSource;
-  
-        private bool turnedOn = false;        
+
+        private bool turnedOn = false;
 
         public bool IsTurnedOn() {
             return turnedOn;
@@ -18,17 +19,17 @@ namespace TheDarkNight.Lights {
         public void Toggle() {
             if(!turnedOn && lightSource.CanTurnOn()) {
                 turnedOn = true;
-                lightSource.TurnOn();                
+                lightSource.TurnOn();
             }
             else if(lightSource.CanTurnOff()) {
                 turnedOn = false;
-                lightSource.TurnOff();                
+                lightSource.TurnOff();
             }
         }
 
         private void OnTriggerEnter(Collider other) {
             ISwitcher switcher = other.GetClass<ISwitcher>();
-            
+
             if(switcher != null) {
                 switcher.CanToggleSwitch(this);
             }
@@ -42,6 +43,7 @@ namespace TheDarkNight.Lights {
         }
 
         private void Start() {
+            collider.isTrigger = true;
             lightSource.TurnedOff.Subscribe(_ => turnedOn = false);
         }
     }

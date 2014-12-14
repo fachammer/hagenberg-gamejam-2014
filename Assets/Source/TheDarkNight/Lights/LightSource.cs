@@ -12,6 +12,12 @@ namespace TheDarkNight.Lights {
 
         private ISubject<ILightSource> turnOff = new Subject<ILightSource>();
 
+        [SerializeField]
+        private LightBulb initialLightBulb;
+
+        [SerializeField]
+        private Transform lightBulbTransform;
+
         private ILightBulb lightBulb;
 
         public IObservable<ILightBulb> NewBulb { get { return newBulb; } }
@@ -42,9 +48,17 @@ namespace TheDarkNight.Lights {
             if(this.lightBulb == null) {
                 this.lightBulb = lightBulb;
                 newBulb.OnNext(lightBulb);
+                lightBulb.GetTransform().parent = transform;
+                lightBulb.GetTransform().position = lightBulbTransform.position;
+                lightBulb.GetTransform().rotation = lightBulbTransform.rotation;
+
                 return true;
             }
             return false;
+        }
+
+        public Transform GetTransform() {
+            return transform;
         }
 
         private void OnTriggerEnter(Collider collider) {
@@ -60,6 +74,7 @@ namespace TheDarkNight.Lights {
         }
 
         private void Start() {
+            this.lightBulb = initialLightBulb;
             collider.isTrigger = true;
         }
     }
