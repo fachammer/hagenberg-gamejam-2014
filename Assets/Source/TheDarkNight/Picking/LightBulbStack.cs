@@ -7,7 +7,6 @@ using TheDarkNight.Lights;
 
 namespace TheDarkNight.Picking {
 
-    [RequireComponent(typeof(InventoryUnlimited))]
     [RequireComponent(typeof(Collider))]
     public class LightBulbStack : MonoBehaviour {
 
@@ -15,7 +14,6 @@ namespace TheDarkNight.Picking {
         private IInventory inventory;
 
         private void Start() {
-            inventory = this.TryGetComponent<InventoryUnlimited>();
             collider.isTrigger = true;
         }
 

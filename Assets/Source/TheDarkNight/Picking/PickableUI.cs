@@ -38,9 +38,9 @@ namespace TheDarkNight.Picking {
 
             if(pickable == null)
                 image.enabled = false;
-            else if(p != null && p.GetComponent<LightBulbStack>() != null) {
+            /*else if(p != null && p.GetComponent<LightBulbStack>() != null) {
                 image.enabled = true;
-            }
+            }*/
             else {
                 image.enabled = pickable != null && pickable == this.pickable;
             }
