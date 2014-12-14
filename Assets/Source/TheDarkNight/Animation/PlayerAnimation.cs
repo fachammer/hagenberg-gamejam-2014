@@ -24,6 +24,7 @@ namespace TheDarkNight.Animation {
             animator = this.TryGetComponent<Animator>();
             IMovement movement = this.TryGetClassInParent<IMovement>();
             IPicker picker = this.TryGetClassInParent<IPicker>();
+            ILightBulbInserter inserter = this.TryGetClassInParent<ILightBulbInserter>();
 
             animator.runtimeAnimatorController = normalAnimation;
             SetState(AnimationState.IDLE);
@@ -31,6 +32,10 @@ namespace TheDarkNight.Animation {
             movement.HorizontalMovement.Subscribe(HandleHorizontalMovement);
             movement.DepthMovement.Subscribe(HandleDepthMovement);
             picker.Picking.Subscribe(HandlePicking);
+            inserter.InsertedLightBulb.Subscribe(_ => {
+                animator.runtimeAnimatorController = normalAnimation;
+                SetState(AnimationState.INSERT_LIGHT_BULB);
+            });
         }
 
         private void HandlePicking(IPickable pickable) {

@@ -28,6 +28,7 @@ namespace TheDarkNight.Picking {
                 pickable.GetTransform().parent = this.transform;
                 pickable.GetTransform().position = new Vector3(0, 0, -20);
                 picking.OnNext(pickable);
+                this.pickable = null;
             }
         }
 
