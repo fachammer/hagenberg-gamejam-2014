@@ -31,21 +31,18 @@ namespace TheDarkNight.Rooms {
 
 
         private void OnTriggerEnter(Collider other) {
-            Debug.Log("Trigger enter: " + other);
             if(other.GetComponent<Darkness.Darkness>() != null) {
                 darknessInTrigger.Add(other.GetComponent<Darkness.Darkness>());
             }
         }
 
         private void OnTriggerStay(Collider other) {
-            Debug.Log("Trigger stay: " + other);
             if(other.GetComponent<Darkness.Darkness>() != null) {
                 darknessInTrigger.Add(other.GetComponent<Darkness.Darkness>());
             }
         }
 
         public void ClearDarkness() {
-            Debug.Log("CLEARING " + darknessInTrigger.Count() + " DARKNESS!");
             darknessInTrigger.Do(d => d.Die());
             darknessInTrigger.Clear();
             possessed = false;

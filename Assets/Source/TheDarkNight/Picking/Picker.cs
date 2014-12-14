@@ -10,6 +10,7 @@ namespace TheDarkNight.Picking {
 
         public void CanPickupPickable(IPickable pickable) {
             this.pickable = pickable;
+            PickUpPickable();//TODO REMOVE
         }
 
         public void CannotPickupPickable(IPickable pickable) {

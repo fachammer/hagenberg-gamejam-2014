@@ -107,5 +107,10 @@ namespace TheDarkNight.Darkness {
                 updateSubscription = Time.ElapsedIntervals(1 / updateFrequency).Subscribe(__ => Move());
             });
         }
+
+        private void OnEnable() {
+            if(Time != null)
+                Start();
+        }
     }
 }
