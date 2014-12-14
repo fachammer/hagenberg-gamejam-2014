@@ -103,7 +103,7 @@ namespace TheDarkNight.Darkness {
         }
 
         private void OnDestroy() {
-            updateSubscription.Dispose();
+            updateSubscription.Dispose();            
             subscription.Dispose();
         }
 
@@ -127,8 +127,10 @@ namespace TheDarkNight.Darkness {
         }
 
         private void OnCollisionEnter(Collision other) {
-            if(other.collider.GetComponent<Killable>() != null)
+            if(other.collider.GetComponent<Killable>() != null) {
+                audio.Play();
                 other.collider.GetComponent<Killable>().Kill();
+            }
         }
     }
 }

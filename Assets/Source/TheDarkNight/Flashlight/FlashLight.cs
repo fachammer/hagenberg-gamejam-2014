@@ -82,7 +82,7 @@ namespace TheDarkNight.FlashLight {
         }
 
         private void DrawLight(bool lightEnabled) {
-            
+            audio.Play();
             Light light = this.TryGetComponentsInChildren<Light>().First();
             light.enabled = lightEnabled;
             GetComponentsInChildren<MeshRenderer>(true).First().enabled = lightEnabled;

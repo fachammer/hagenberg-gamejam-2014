@@ -1,4 +1,4 @@
-﻿using TheDarkNight.Extensions;
+using TheDarkNight.Extensions;
 using UniRx;
 using UnityEngine;
 
@@ -29,7 +29,7 @@ namespace TheDarkNight.Movement {
 
         private void Awake() {
             Rigidbody r = this.TryGetComponent<Rigidbody>();
-            playerMovement = new PlayerMovement(r, movementSettings);
+            playerMovement = new PlayerMovement(r, audio, movementSettings);
         }
 
         private void Update() {

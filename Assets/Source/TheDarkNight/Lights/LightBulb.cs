@@ -27,7 +27,7 @@ namespace TheDarkNight.Lights {
         }
 
         public bool CanTurnOff() {
-            return pointLight.enabled;
+            return pointLight != null && pointLight.enabled;
         }
 
         public void TurnOn() {

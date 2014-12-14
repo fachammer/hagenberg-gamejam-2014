@@ -28,9 +28,7 @@ namespace TheDarkNight.Lights {
         public bool ToggleSwitch() {
             if(this.targetSwitch.Value != null) {
                 this.targetSwitch.Value.Toggle();
-                Dropper d = GetComponent<Dropper>();
-                d.enabled = false;
-                Time.Once(0.25f).Subscribe(_ => d.enabled = true);
+
                 return true;
             }
             return false;
