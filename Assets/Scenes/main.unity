@@ -2977,7 +2977,7 @@ GameObject:
   - 23: {fileID: 168530787}
   - 114: {fileID: 168530791}
   m_Layer: 0
-  m_Name: Battery
+  m_Name: battery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13804,7 +13804,7 @@ GameObject:
   - 65: {fileID: 782939666}
   - 114: {fileID: 782939665}
   - 114: {fileID: 782939670}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DARKNESSPREFAB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15274,7 +15274,7 @@ GameObject:
   - 65: {fileID: 845829864}
   - 114: {fileID: 845829863}
   - 114: {fileID: 845829868}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DARKNESSPREFAB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19300,7 +19300,7 @@ GameObject:
   - 65: {fileID: 1014062441}
   - 114: {fileID: 1014062440}
   - 114: {fileID: 1014062445}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DARKNESSPREFAB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19824,7 +19824,7 @@ GameObject:
   - 65: {fileID: 1020725263}
   - 114: {fileID: 1020725262}
   - 114: {fileID: 1020725267}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DARKNESSPREFAB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32706,7 +32706,7 @@ GameObject:
   - 65: {fileID: 1708797528}
   - 114: {fileID: 1708797527}
   - 114: {fileID: 1708797532}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DARKNESSPREFAB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
