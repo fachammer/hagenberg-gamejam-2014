@@ -35,14 +35,8 @@ namespace TheDarkNight.FlashLight {
         }
 
         public void Toggle() {
-            if(turnedOn) {
-                DrawLight(false);
-                turnedOn = false;
-            }
-            else if(TryUseNewBattery()){
-                DrawLight(true);
-                turnedOn = true;
-            }
+            if(!TryTurnOn())
+                TryTurnOff();
         }
 
         public float GetBatteryLoad() {

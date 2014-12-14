@@ -59,12 +59,6 @@ namespace TheDarkNight.Darkness {
         }
 
         private void Move() {
-            if(Vector3.Distance(transform.position, lastPos) > instantiateDistance) {
-                lastPos = transform.position;
-                GameObject newDarkness = GOI.Instantiate(darknessDummyPrefab, this.transform.position, Quaternion.identity);
-                newDarkness.transform.position = this.transform.position;
-            }
-
             transform.position = Vector3.MoveTowards(transform.position, nextRoomEntry.position, UnityEngine.Random.Range(maxSpeed, minSpeed));
 
             if(transform.position == nextRoomEntry.position && RoomEnterable(nextRoom)) {
@@ -72,10 +66,6 @@ namespace TheDarkNight.Darkness {
                 List<Transform> possibleNextEntries = entriesToAdjacentRooms.Where(r => RoomEnterable(r.GetComponentInParent<Room>())).ToList();
 
                 if(possibleNextEntries.Count() > 0) {
-                    nextRoom.possessed = true;
-
-                    DuplicateSelf(this.nextRoomEntry);
-
                     nextRoomEntry = possibleNextEntries.ElementAt(UnityEngine.Random.Range(0, possibleNextEntries.Count()));
                     nextRoom = nextRoomEntry.GetComponentInParent<Room>();                    
                 }
@@ -83,7 +73,7 @@ namespace TheDarkNight.Darkness {
         }
 
         private bool RoomEnterable(Room room) {
-            return !room.enlightened && !room.possessed;
+            return !room.enlightened;
         }
 
         private void DuplicateSelf(Transform nextEntry) {

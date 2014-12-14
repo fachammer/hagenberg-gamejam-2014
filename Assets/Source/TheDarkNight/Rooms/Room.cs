@@ -10,8 +10,6 @@ namespace TheDarkNight.Rooms {
     public class Room : MonoBehaviour, IRoom {
         public bool enlightened = false;
 
-        public bool possessed = false;
-
         [SerializeField]
         private LightSource lightSource;
 
@@ -27,7 +25,6 @@ namespace TheDarkNight.Rooms {
         public void ClearDarkness() {
             darknessInTrigger.Do(d => { if(d != null) d.Die(); });
             darknessInTrigger.Clear();
-            possessed = false;
         }
 
         private void Start() {
