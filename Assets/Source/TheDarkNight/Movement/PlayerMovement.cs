@@ -1,4 +1,5 @@
 ﻿using System;
+using UniRx;
 using UnityEngine;
 
 namespace TheDarkNight.Movement {
@@ -8,10 +9,19 @@ namespace TheDarkNight.Movement {
         private Settings settings;
         private int currentLayer = 0;
 
+        private ISubject<float> horizontalMovement = new Subject<float>();
+        private ISubject<float> depthMovement = new Subject<float>();
+
+        public IObservable<float> HorizontalMovement {
+            get { return horizontalMovement; }
+        }
+
+        public IObservable<float> DepthMovement {
+            get { return depthMovement; }
+        }
+
         private float CurrentLayerDepth {
-            get {
-                return currentLayer * settings.depthLayerWidth;
-            }
+            get { return currentLayer * settings.depthLayerWidth; }
         }
 
         public PlayerMovement(Rigidbody rigidbody, Settings settings) {
@@ -25,9 +35,12 @@ namespace TheDarkNight.Movement {
 
             rigidbody.velocity += new Vector3(settings.maxHorizontalSpeed * movementScale, 0, 0);
             ClampVelocity();
+
+            horizontalMovement.OnNext(movementScale);
         }
 
         public void MoveDepth(float movementScale) {
+            depthMovement.OnNext(movementScale);
             if(IsPlayerMovingInDepth())
                 return;
 

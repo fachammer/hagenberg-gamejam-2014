@@ -1,4 +1,5 @@
 ﻿using TheDarkNight.Extensions;
+using UniRx;
 using UnityEngine;
 
 namespace TheDarkNight.Movement {
@@ -10,6 +11,14 @@ namespace TheDarkNight.Movement {
 
         private PlayerMovement playerMovement;
 
+        public IObservable<float> HorizontalMovement {
+            get { return playerMovement.HorizontalMovement; }
+        }
+
+        public IObservable<float> DepthMovement {
+            get { return playerMovement.DepthMovement; }
+        }
+
         public void MoveHorizontally(float movementScale) {
             playerMovement.MoveHorizontally(movementScale);
         }
@@ -18,7 +27,7 @@ namespace TheDarkNight.Movement {
             playerMovement.MoveDepth(movementScale);
         }
 
-        private void Start() {
+        private void Awake() {
             Rigidbody r = this.TryGetComponent<Rigidbody>();
             playerMovement = new PlayerMovement(r, movementSettings);
         }

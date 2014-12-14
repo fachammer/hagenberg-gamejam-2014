@@ -1,20 +1,24 @@
-using UnityEngine;
-using System.Collections;
+using TheDarkNight.Extensions;
 using UniRx;
+using UnityEngine;
 
 namespace TheDarkNight.Lights {
-    public class LightSource : MonoBehaviour, ILightSource {
 
-        public IObservable<ILightBulb> NewBulb { get { return newBulb; } }
+    [RequireComponent(typeof(Collider))]
+    public class LightSource : MonoBehaviour, ILightSource {
         private ISubject<ILightBulb> newBulb = new Subject<ILightBulb>();
 
-        public IObservable<ILightSource> TurnedOn { get { return turnOn; } }
         private ISubject<ILightSource> turnOn = new Subject<ILightSource>();
 
-        public IObservable<ILightSource> TurnedOff { get { return turnOff; } }
         private ISubject<ILightSource> turnOff = new Subject<ILightSource>();
-        
+
         private ILightBulb lightBulb;
+
+        public IObservable<ILightBulb> NewBulb { get { return newBulb; } }
+
+        public IObservable<ILightSource> TurnedOn { get { return turnOn; } }
+
+        public IObservable<ILightSource> TurnedOff { get { return turnOff; } }
 
         public bool CanTurnOn() {
             return lightBulb != null && lightBulb.CanTurnOn();
@@ -34,13 +38,29 @@ namespace TheDarkNight.Lights {
             turnOff.OnNext(this);
         }
 
-        public bool TryInsertLightBulb(ILightBulb lightBulb) {  
-            if(lightBulb == null) {
+        public bool TryInsertLightBulb(ILightBulb lightBulb) {
+            if(this.lightBulb == null) {
                 this.lightBulb = lightBulb;
                 newBulb.OnNext(lightBulb);
                 return true;
             }
             return false;
+        }
+
+        private void OnTriggerEnter(Collider collider) {
+            ILightBulbInserter inserter = collider.GetClass<ILightBulbInserter>();
+            if(inserter != null)
+                inserter.CanInsertLightBulb(this);
+        }
+
+        private void OnTriggerExit(Collider collider) {
+            ILightBulbInserter inserter = collider.GetClass<ILightBulbInserter>();
+            if(inserter != null)
+                inserter.CannotInsertLightBulb(this);
+        }
+
+        private void Start() {
+            collider.isTrigger = true;
         }
     }
 }
