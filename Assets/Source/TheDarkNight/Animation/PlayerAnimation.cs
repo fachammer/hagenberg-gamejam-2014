@@ -59,7 +59,7 @@ namespace TheDarkNight.Animation {
                 else if(direction < 0)
                     transform.localRotation = Quaternion.Euler(0, 270, 0);
             }
-            else if(depthDirection == 0) {
+            else if(depthDirection == 0 && GetState() != AnimationState.PICKING) {
                 SetState(AnimationState.IDLE);
             }
         }
@@ -73,7 +73,7 @@ namespace TheDarkNight.Animation {
                 else if(direction < 0)
                     transform.localRotation = Quaternion.Euler(0, 180, 0);
             }
-            else if(horizontalDirection == 0)
+            else if(horizontalDirection == 0 && GetState() != AnimationState.PICKING)
                 SetState(AnimationState.IDLE);
         }
 
