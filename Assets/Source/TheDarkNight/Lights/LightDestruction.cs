@@ -55,7 +55,8 @@ namespace TheDarkNight.Lights {
 
         private void DestroyBulb() {
             lightSource.SetBulbNull();
-            lightBulb.Destroy();
+            if(lightBulb != null)
+                lightBulb.Destroy();
         }
     }
 

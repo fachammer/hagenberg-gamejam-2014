@@ -43,9 +43,12 @@ namespace TheDarkNight.Picking {
                     pickable.Value.GetTransform().gameObject.name = "LightBulb";
                     clone.transform.position = pickable.Value.GetTransform().position;
                 }
+
                 Dropper d = GetComponent<Dropper>();
                 d.enabled = false;
                 Time.Once(0.25f).Subscribe(_ => d.enabled = true);
+
+
                 pickable.Value.GetTransform().parent = this.transform;
                 pickable.Value.GetTransform().position = new Vector3(0, 0, -20);
                 picking.OnNext(pickable.Value);
