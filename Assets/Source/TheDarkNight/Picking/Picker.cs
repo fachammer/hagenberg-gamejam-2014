@@ -1,4 +1,5 @@
 using TheDarkNight.Extensions;
+using TheDarkNight.Utility;
 using UniRx;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace TheDarkNight.Picking {
 
     [RequireComponent(typeof(Inventory))]
     public class Picker : MonoBehaviour, IPicker {
-        private IPickable pickable;
+        private ObservableProperty<IPickable> pickable = new ObservableProperty<IPickable>(null);
         private IInventory inventory;
 
         private ISubject<IPickable> picking = new Subject<IPickable>();
@@ -15,20 +16,25 @@ namespace TheDarkNight.Picking {
             get { return picking; }
         }
 
+        public IObservable<IPickable> CanPickup {
+            get { return pickable; }
+        }
+
         public void CanPickupPickable(IPickable pickable) {
-            this.pickable = pickable;
+            this.pickable.Value = pickable;
         }
 
         public void CannotPickupPickable() {
-            this.pickable = null;
+            this.pickable.Value = null;
         }
 
         public void TryPickUpPickable() {
-            if(this.pickable != null && inventory.AddItem(pickable)) {
-                pickable.GetTransform().parent = this.transform;
-                pickable.GetTransform().position = new Vector3(0, 0, -20);
-                picking.OnNext(pickable);
-                this.pickable = null;
+            if(this.pickable.Value != null && inventory.AddItem(pickable.Value) && pickable.Value.CanBePickedUpBy(this)) {
+                pickable.Value.GetTransform().parent = this.transform;
+                pickable.Value.GetTransform().position = new Vector3(0, 0, -20);
+                picking.OnNext(pickable.Value);
+                pickable.Value.CannotBePickedupByOthersThan(this);
+                this.pickable.Value = null;
             }
         }
 

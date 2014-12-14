@@ -5,7 +5,8 @@ using TheDarkNight.Picking;
 using UnityEngine;
 
 namespace TheDarkNight.Lights {
-        
+
+    [RequireComponent(typeof(DarknessHider))]
     public class LightBulb : Pickable, ILightBulb {
         private Light pointLight;
         private bool intact = true;
@@ -26,7 +27,7 @@ namespace TheDarkNight.Lights {
 
         public void TurnOn() {
             pointLight.enabled = true;
-            this.TryGetComponentsInChildren<DarknessKiller>().First().Activate();
+            this.TryGetComponent<DarknessKiller>().Activate();
         }
 
         public void TurnOff() {
@@ -35,6 +36,7 @@ namespace TheDarkNight.Lights {
 
         protected override void Start() {
             base.Start();
+            collider.isTrigger = true;
             pointLight = this.TryGetComponentsInChildren<Light>().First();
         }
     }

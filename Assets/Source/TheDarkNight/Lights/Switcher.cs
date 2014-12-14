@@ -1,22 +1,27 @@
+using TheDarkNight.Utility;
+using UniRx;
 using UnityEngine;
-using System.Collections;
 
 namespace TheDarkNight.Lights {
-    public class Switcher : MonoBehaviour, ISwitcher {
-                
-        private ISwitch targetSwitch;
 
-        public void CanToggleSwitch(ISwitch targetSwitch) { 
-            this.targetSwitch = targetSwitch;
+    public class Switcher : MonoBehaviour, ISwitcher {
+        private ObservableProperty<ISwitch> targetSwitch = new ObservableProperty<ISwitch>(null);
+
+        public IObservable<ISwitch> ToggleableSwitch {
+            get { return targetSwitch; }
+        }
+
+        public void CanToggleSwitch(ISwitch targetSwitch) {
+            this.targetSwitch.Value = targetSwitch;
         }
 
         public void CannotToggleSwitch() {
-            this.targetSwitch = null;
+            this.targetSwitch.Value = null;
         }
 
         public bool ToggleSwitch() {
-            if(this.targetSwitch != null) {
-                this.targetSwitch.Toggle();
+            if(this.targetSwitch.Value != null) {
+                this.targetSwitch.Value.Toggle();
                 return true;
             }
             return false;

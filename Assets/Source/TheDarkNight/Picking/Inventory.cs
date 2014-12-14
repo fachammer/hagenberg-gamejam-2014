@@ -6,6 +6,7 @@ using TheDarkNight.Lights;
 using TheDarkNight.FlashLight;
 
 namespace TheDarkNight.Picking {
+
     public class Inventory : MonoBehaviour, IInventory {
 
         [SerializeField]
@@ -32,7 +33,6 @@ namespace TheDarkNight.Picking {
         public virtual bool RemoveItem(IPickable pickable) {
             if(pickable is ILightBulb) {
                 if(lightBulbs.Remove(pickable as ILightBulb)) {
-                    Destroy(pickable.GetTransform().gameObject);
                     return true;
                 }
                 return false;

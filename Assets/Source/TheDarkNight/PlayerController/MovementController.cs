@@ -12,21 +12,36 @@ namespace TheDarkNight.PlayerController {
         private CompositeDisposable movementSubscriptions = new CompositeDisposable();
 
         [SerializeField]
-        private string horizontalMovementAxis;
+        private string horizontalMovementKeyboardAxis;
 
         [SerializeField]
-        private string depthMovementAxis;
+        private string horizontalMovementJoystickAxis;
+
+        [SerializeField]
+        private string depthMovementKeyboardAxis;
+
+        [SerializeField]
+        private string depthMovementJoystickAxis;
 
         private IMovement playerMovement;
 
         private void Start() {
             playerMovement = this.TryGetClass<IMovement>();
             IAxesManager axesManager = this.TryGetClass<IAxesManager>();
-            IObservableAxis horizontalMovement = axesManager.GetAxis(horizontalMovementAxis);
-            IObservableAxis depthMovement = axesManager.GetAxis(depthMovementAxis);
+            IObservableAxis horizontalMovement = axesManager.GetAxis(horizontalMovementKeyboardAxis);
+            IObservableAxis horizontalMovementJoystick = axesManager.GetAxis(horizontalMovementJoystickAxis);
+            IObservableAxis depthMovement = axesManager.GetAxis(depthMovementKeyboardAxis);
+            IObservableAxis depthMovementJoystick = axesManager.GetAxis(depthMovementJoystickAxis);
 
-            horizontalMovement.Subscribe(HandleHorizontalAxis).AddTo(movementSubscriptions);
-            depthMovement.DistinctUntilChanged().Subscribe(HandleDepthAxis).AddTo(movementSubscriptions);
+            if(Input.GetJoystickNames().Length < 2)
+                horizontalMovement.Subscribe(HandleHorizontalAxis).AddTo(movementSubscriptions);
+            else
+                horizontalMovementJoystick.Subscribe(HandleHorizontalAxis).AddTo(movementSubscriptions);
+
+            if(Input.GetJoystickNames().Length < 2)
+                depthMovement.DistinctUntilChanged().Subscribe(HandleDepthAxis).AddTo(movementSubscriptions);
+            else
+                depthMovementJoystick.DistinctUntilChanged().Subscribe(HandleDepthAxis).AddTo(movementSubscriptions);
         }
 
         private void OnDisable() {
