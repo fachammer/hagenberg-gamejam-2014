@@ -1,5 +1,6 @@
 using ModestTree.Zenject;
 using TheDarkNight.Extensions;
+using TheDarkNight.Observables.Time;
 using TheDarkNight.Utility;
 using UniRx;
 using UnityEngine;
@@ -15,6 +16,9 @@ namespace TheDarkNight.Picking {
 
         [Inject]
         public GameObjectInstantiator GOI { get; set; }
+
+        [Inject]
+        public IObservableTime Time { get; set; }
 
         public IObservable<IPickable> Picking {
             get { return picking; }
@@ -39,6 +43,9 @@ namespace TheDarkNight.Picking {
                     pickable.Value.GetTransform().gameObject.name = "LightBulb";
                     clone.transform.position = pickable.Value.GetTransform().position;
                 }
+                Dropper d = GetComponent<Dropper>();
+                d.enabled = false;
+                Time.Once(0.25f).Subscribe(_ => d.enabled = true);
                 pickable.Value.GetTransform().parent = this.transform;
                 pickable.Value.GetTransform().position = new Vector3(0, 0, -20);
                 picking.OnNext(pickable.Value);

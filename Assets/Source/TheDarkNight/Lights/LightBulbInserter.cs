@@ -1,5 +1,7 @@
-﻿using System.Linq;
+using ModestTree.Zenject;
+using System.Linq;
 using TheDarkNight.Extensions;
+using TheDarkNight.Observables.Time;
 using TheDarkNight.Picking;
 using TheDarkNight.Utility;
 using UniRx;
@@ -9,6 +11,9 @@ namespace TheDarkNight.Lights {
 
     [RequireComponent(typeof(IInventory))]
     public class LightBulbInserter : MonoBehaviour, ILightBulbInserter {
+        [Inject]
+        public IObservableTime Time { get; set; }
+
         private IInventory inventory;
 
         private ISubject<ILightSource> insertedLightBulb = new Subject<ILightSource>();
@@ -25,6 +30,11 @@ namespace TheDarkNight.Lights {
 
         public bool TryInsertLightBulb() {
             if(IsInsertPossible()) {
+
+                Dropper d = GetComponent<Dropper>();
+                d.enabled = false;
+                Time.Once(0.5f).Subscribe(_ => d.enabled = true);
+
                 ILightBulb lightBulb = GetLightBulb();
                 lightSource.Value.TryInsertLightBulb(lightBulb);
                 insertedLightBulb.OnNext(lightSource.Value);

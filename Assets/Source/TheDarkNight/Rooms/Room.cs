@@ -25,7 +25,7 @@ namespace TheDarkNight.Rooms {
         }
 
         public void ClearDarkness() {
-            darknessInTrigger.Do(d => d.Die());
+            darknessInTrigger.Do(d => { if(d != null) d.Die(); });
             darknessInTrigger.Clear();
             possessed = false;
         }

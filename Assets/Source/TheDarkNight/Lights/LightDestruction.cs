@@ -39,6 +39,7 @@ namespace TheDarkNight.Lights {
                 runTime -= UnityEngine.Time.deltaTime;
                 if(runTime <= 0.0f) {
                     DestroyBulb();
+                    lightsOn = false;
                 }
             }
         }
@@ -53,6 +54,7 @@ namespace TheDarkNight.Lights {
         }
 
         private void DestroyBulb() {
+            lightSource.SetBulbNull();
             lightBulb.Destroy();
         }
     }

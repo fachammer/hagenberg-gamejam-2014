@@ -1,3 +1,6 @@
+using ModestTree.Zenject;
+using TheDarkNight.Observables.Time;
+using TheDarkNight.Picking;
 using TheDarkNight.Utility;
 using UniRx;
 using UnityEngine;
@@ -6,6 +9,9 @@ namespace TheDarkNight.Lights {
 
     public class Switcher : MonoBehaviour, ISwitcher {
         private ObservableProperty<ISwitch> targetSwitch = new ObservableProperty<ISwitch>(null);
+
+        [Inject]
+        public IObservableTime Time { get; set; }
 
         public IObservable<ISwitch> ToggleableSwitch {
             get { return targetSwitch; }
@@ -22,6 +28,9 @@ namespace TheDarkNight.Lights {
         public bool ToggleSwitch() {
             if(this.targetSwitch.Value != null) {
                 this.targetSwitch.Value.Toggle();
+                Dropper d = GetComponent<Dropper>();
+                d.enabled = false;
+                Time.Once(0.25f).Subscribe(_ => d.enabled = true);
                 return true;
             }
             return false;

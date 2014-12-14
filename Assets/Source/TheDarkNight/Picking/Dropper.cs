@@ -21,13 +21,12 @@ namespace TheDarkNight.Picking {
         
         public bool TryDropLightBulb() {
             ILightBulb lightBulb = inventory.GetItems().Where(i => i is ILightBulb).FirstOrDefault() as ILightBulb;
-            if(lightBulb != null) {
+            if(lightBulb != null && this.enabled) {
                 inventory.RemoveItem(lightBulb);
                 drop.OnNext(lightBulb);
                 Destroy(lightBulb.GetTransform().gameObject);
                 return true;
             }
-
             return false;
         }
 
