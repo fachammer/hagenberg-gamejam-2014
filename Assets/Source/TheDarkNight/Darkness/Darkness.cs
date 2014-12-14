@@ -51,7 +51,8 @@ namespace TheDarkNight.Darkness {
         private void Move() {
             if(Vector3.Distance(transform.position, lastPos) > instantiateDistance) {
                 lastPos = transform.position;
-                GOI.Instantiate(darknessDummyPrefab, this.transform.position, Quaternion.Euler(new Vector3(0,0,90)));
+                GameObject newDarkness = GOI.Instantiate(darknessDummyPrefab, this.transform.position, Quaternion.Euler(new Vector3(0,0,90)));
+                newDarkness.transform.position = this.transform.position;
             }
 
             transform.position = Vector3.MoveTowards(transform.position, nextRoomEntry.position, UnityEngine.Random.Range(maxSpeed, minSpeed));

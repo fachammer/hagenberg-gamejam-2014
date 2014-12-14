@@ -6,7 +6,7 @@ using TheDarkNight.Lights;
 using TheDarkNight.FlashLight;
 
 namespace TheDarkNight.Picking {
-    public class Inventory : MonoBehaviour, IInventory{
+    public class Inventory : MonoBehaviour, IInventory {
 
         [SerializeField]
         private int maxBatteries = 3;
@@ -29,7 +29,7 @@ namespace TheDarkNight.Picking {
             return false;
         }
 
-        public bool RemoveItem(IPickable pickable) {
+        public virtual bool RemoveItem(IPickable pickable) {
             if(pickable is ILightBulb) {
                 if(lightBulbs.Remove(pickable as ILightBulb)) {
                     Destroy(pickable.GetTransform().gameObject);
@@ -48,7 +48,7 @@ namespace TheDarkNight.Picking {
         }
 
 
-        public IEnumerable<IPickable> GetItems() {
+        public virtual IEnumerable<IPickable> GetItems() {
             return batteries.Concat(lightBulbs);
         }
     }

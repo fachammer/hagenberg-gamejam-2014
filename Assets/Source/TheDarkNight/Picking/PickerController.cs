@@ -20,7 +20,7 @@ namespace TheDarkNight.Picking {
 
         private void TryPickUp(float value) {
             if(value > 0)
-                this.TryGetClass<IPicker>().PickUpPickable();
+                this.TryGetClass<IPicker>().TryPickUpPickable();
         }
     }
 }
