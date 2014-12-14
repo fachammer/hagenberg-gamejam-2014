@@ -1,3 +1,4 @@
+using ModestTree.Zenject;
 using TheDarkNight.Extensions;
 using TheDarkNight.Utility;
 using UniRx;
@@ -11,6 +12,9 @@ namespace TheDarkNight.Picking {
         private IInventory inventory;
 
         private ISubject<IPickable> picking = new Subject<IPickable>();
+
+        [Inject]
+        public GameObjectInstantiator GOI { get; set; }
 
         public IObservable<IPickable> Picking {
             get { return picking; }
@@ -30,6 +34,11 @@ namespace TheDarkNight.Picking {
 
         public void TryPickUpPickable() {
             if(this.pickable.Value != null && inventory.AddItem(pickable.Value) && pickable.Value.CanBePickedUpBy(this)) {
+                if(pickable.Value.GetTransform().gameObject.name.Contains("SPECIAL")) {
+                    GameObject clone = GOI.Instantiate(pickable.Value.GetTransform().gameObject);
+                    pickable.Value.GetTransform().gameObject.name = "LightBulb";
+                    clone.transform.position = pickable.Value.GetTransform().position;
+                }
                 pickable.Value.GetTransform().parent = this.transform;
                 pickable.Value.GetTransform().position = new Vector3(0, 0, -20);
                 picking.OnNext(pickable.Value);

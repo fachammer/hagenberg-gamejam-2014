@@ -63,7 +63,7 @@ namespace TheDarkNight.Movement {
             float collisionRadius = rigidbody.collider.bounds.size.magnitude / 4;
             float collisionDistance = settings.depthLayerWidth + rigidbody.collider.bounds.size.z / 2;
             RaycastHit hit;
-            return Physics.SphereCast(rigidbody.position, collisionRadius, new Vector3(0, 0, direction), out hit, collisionDistance, settings.depthCollisionLayers);
+            return Physics.Raycast(rigidbody.position, new Vector3(0, 0, direction), collisionDistance, settings.depthCollisionLayers);
         }
 
         private bool IsPlayerMovingInDepth() {

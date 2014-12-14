@@ -1,3 +1,4 @@
+using System;
 using TheDarkNight.Extensions;
 using TheDarkNight.Lights;
 using UniRx;
@@ -10,6 +11,8 @@ namespace TheDarkNight.Picking {
     public class PickableUI : MonoBehaviour {
         private Image image;
 
+        IDisposable subscription = Disposable.Empty;
+
         [SerializeField]
         private Picker picker;
 
@@ -21,10 +24,16 @@ namespace TheDarkNight.Picking {
         }
 
         private void Start() {
-            picker.CanPickup.Subscribe(HandleCanPickup);
+           subscription = picker.CanPickup.Subscribe(HandleCanPickup);
+        }
+
+        private void OnDestroy() {
+            subscription.Dispose();
         }
 
         private void HandleCanPickup(IPickable pickable) {
+            if(!gameObject.activeInHierarchy)
+                return;
             Pickable p = this.pickable as Pickable;
 
             if(pickable == null)

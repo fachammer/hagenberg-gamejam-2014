@@ -1,4 +1,4 @@
-﻿using TheDarkNight.Extensions;
+using TheDarkNight.Extensions;
 using TheDarkNight.Lights;
 using TheDarkNight.Movement;
 using TheDarkNight.Picking;
@@ -25,6 +25,7 @@ namespace TheDarkNight.Animation {
             IMovement movement = this.TryGetClassInParent<IMovement>();
             IPicker picker = this.TryGetClassInParent<IPicker>();
             ILightBulbInserter inserter = this.TryGetClassInParent<ILightBulbInserter>();
+            IDropper dropper = this.TryGetClassInParent<IDropper>();
 
             animator.runtimeAnimatorController = normalAnimation;
             SetState(AnimationState.IDLE);
@@ -35,6 +36,10 @@ namespace TheDarkNight.Animation {
             inserter.InsertedLightBulb.Subscribe(_ => {
                 animator.runtimeAnimatorController = normalAnimation;
                 SetState(AnimationState.INSERT_LIGHT_BULB);
+            });
+            dropper.Drop.Subscribe(_ => {
+                animator.runtimeAnimatorController = normalAnimation;
+                SetState(AnimationState.PICKING);
             });
         }
 
