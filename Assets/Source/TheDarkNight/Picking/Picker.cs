@@ -24,11 +24,11 @@ namespace TheDarkNight.Picking {
             this.pickable.Value = pickable;
         }
 
-        public void CannotPickupPickable(IPickable pickable) {
+        public void CannotPickupPickable() {
             this.pickable.Value = null;
         }
 
-        public void PickUpPickable() {
+        public void TryPickUpPickable() {
             if(this.pickable.Value != null && inventory.AddItem(pickable.Value) && pickable.Value.CanBePickedUpBy(this)) {
                 pickable.Value.GetTransform().parent = this.transform;
                 pickable.Value.GetTransform().position = new Vector3(0, 0, -20);

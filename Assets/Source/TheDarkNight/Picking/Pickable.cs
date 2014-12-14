@@ -31,8 +31,9 @@ namespace TheDarkNight.Picking {
 
         private void OnTriggerExit(Collider other) {
             IPicker picker = other.GetClass<IPicker>();
-            if(picker != null)
-                picker.CannotPickupPickable(this);
+            if(picker != null) {
+                picker.CannotPickupPickable();
+            }
         }
     }
 }

@@ -10,8 +10,8 @@ namespace TheDarkNight.Picking {
 
         void CanPickupPickable(IPickable pickable);
 
-        void CannotPickupPickable(IPickable pickable);
+        void CannotPickupPickable();
 
-        void PickUpPickable();
+        void TryPickUpPickable();
     }
 }

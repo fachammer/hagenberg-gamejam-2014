@@ -1,8 +1,9 @@
-using System.Collections.Generic;
-using System.Linq;
-using TheDarkNight.FlashLight;
-using TheDarkNight.Lights;
 using UnityEngine;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
+using TheDarkNight.Lights;
+using TheDarkNight.FlashLight;
 
 namespace TheDarkNight.Picking {
 
@@ -29,7 +30,7 @@ namespace TheDarkNight.Picking {
             return false;
         }
 
-        public bool RemoveItem(IPickable pickable) {
+        public virtual bool RemoveItem(IPickable pickable) {
             if(pickable is ILightBulb) {
                 if(lightBulbs.Remove(pickable as ILightBulb)) {
                     return true;
@@ -46,8 +47,10 @@ namespace TheDarkNight.Picking {
             return false;
         }
 
-        public IEnumerable<IPickable> GetItems() {
+
+        public virtual IEnumerable<IPickable> GetItems() {
             return batteries.Concat(lightBulbs);
         }
     }
+
 }
