@@ -31,12 +31,18 @@ namespace TheDarkNight.FlashLight {
         }
 
         public void Toggle() {
-            if(!TryTurnOff()) {
-                TryTurnOn();
+            if(turnedOn) {
+                DrawLight(false);
+                turnedOn = false;
+            }
+            else if(TryUseNewBattery()){
+                DrawLight(true);
+                turnedOn = true;
             }
         }
 
         public float GetBatteryLoad() {
+            UpdateBatteries();
             return batteries != null ? batteries.Select(b => b.GetRemainingTime()).Sum() : 0f;
         }
 
@@ -45,13 +51,6 @@ namespace TheDarkNight.FlashLight {
         }
 
         private void Update() {
-            if(Input.GetKeyUp(KeyCode.Space)) {
-                if(turnedOn)
-                    TryTurnOff();
-                else
-                    TryTurnOn();
-            }
-
             if(turnedOn) {
                 batteryInUse.DecreaseBatteryTime(Time.deltaTime);
                 if(batteryInUse.GetRemainingTime() <= 0) {
@@ -83,10 +82,11 @@ namespace TheDarkNight.FlashLight {
         }
 
         private void DrawLight(bool lightEnabled) {
+            
             Light light = this.TryGetComponentsInChildren<Light>().First();
             light.enabled = lightEnabled;
-            GetComponentsInChildren<MeshRenderer>().First().enabled = lightEnabled;
-            GetComponentsInChildren<DarknessHider>().First().collider.enabled = lightEnabled;
+            GetComponentsInChildren<MeshRenderer>(true).First().enabled = lightEnabled;
+            GetComponentsInChildren<DarknessHider>(true).First().collider.enabled = lightEnabled;
         }
     }
 }

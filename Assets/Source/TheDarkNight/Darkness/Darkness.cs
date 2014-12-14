@@ -37,6 +37,9 @@ namespace TheDarkNight.Darkness {
         private float maxSpeed = 1;
 
         [SerializeField]
+        private float rotateSpeed = 5;
+
+        [SerializeField]
         private float minSpeed = 0.5f;
 
         [SerializeField]
@@ -50,7 +53,7 @@ namespace TheDarkNight.Darkness {
         }
 
         private void Update() {
-            transform.Rotate(0, 5 * UnityEngine.Time.deltaTime, 0);
+            transform.Rotate(0, rotateSpeed * UnityEngine.Time.deltaTime, 0);
         }
 
         private void Move() {
@@ -117,6 +120,11 @@ namespace TheDarkNight.Darkness {
         private void OnEnable() {
             if(Time != null)
                 Start();
+        }
+
+        private void OnCollisionEnter(Collision other) {
+            if(other.collider.GetComponent<Killable>() != null)
+                other.collider.GetComponent<Killable>().Kill();
         }
     }
 }

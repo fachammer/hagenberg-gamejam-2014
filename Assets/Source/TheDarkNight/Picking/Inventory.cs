@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TheDarkNight.Lights;
 using TheDarkNight.FlashLight;
+using ModestTree.Zenject;
 
 namespace TheDarkNight.Picking {
 
@@ -15,8 +16,20 @@ namespace TheDarkNight.Picking {
         [SerializeField]
         private int maxLightBulbs = 1;
 
+        [SerializeField]
+        private Battery battery;
+
+        [Inject]
+        public GameObjectInstantiator GOI { get; set; }
+
         private List<IPickable> batteries = new List<IPickable>();
         private List<IPickable> lightBulbs = new List<IPickable>();
+
+        private void Start() {
+            for(int i = 0; i < maxBatteries; i++) {
+                AddItem(GOI.Instantiate(battery.gameObject).GetComponent<Battery>());
+            }
+        }
 
         public bool AddItem(IPickable pickable) {
             if(pickable is ILightBulb && lightBulbs.Count < maxLightBulbs) {
