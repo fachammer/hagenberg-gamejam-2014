@@ -2235,7 +2235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSettings:
-    maxHorizontalSpeed: 2
+    maxHorizontalSpeed: 3
     depthMovementForce: 1000
     maxDepthMovementSpeed: 7
     depthLayers: 2
