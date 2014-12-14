@@ -1,10 +1,11 @@
 using System.Linq;
 using TheDarkNight.Extensions;
+using TheDarkNight.FlashLight;
 using TheDarkNight.Picking;
 using UnityEngine;
 
 namespace TheDarkNight.Lights {
-
+        
     public class LightBulb : Pickable, ILightBulb {
         private Light pointLight;
         private bool intact = true;
@@ -25,6 +26,7 @@ namespace TheDarkNight.Lights {
 
         public void TurnOn() {
             pointLight.enabled = true;
+            this.TryGetComponentsInChildren<DarknessKiller>().First().Activate();
         }
 
         public void TurnOff() {

@@ -37,7 +37,7 @@ namespace TheDarkNight.Lights {
         private void OnTriggerExit(Collider other) {
             ISwitcher switcher = other.GetClass<ISwitcher>();
             if(switcher != null) {
-                switcher.CannotToggleSwitch(this);
+                switcher.CannotToggleSwitch();
             }
         }
 

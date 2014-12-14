@@ -11,6 +11,7 @@ using System.Collections.Generic;
 
 namespace TheDarkNight.Darkness {
 
+    [RequireComponent(typeof(Rigidbody))]
     public class Darkness : MonoBehaviour, IDarkness {
         private IDisposable updateSubscription = Disposable.Empty;
         private Transform nextRoomEntry;
@@ -47,16 +48,6 @@ namespace TheDarkNight.Darkness {
         public void SetValues(Transform startingEntry) {
             this.startingEntry = startingEntry;
         }
-
-        private void Start() {
-            Time.Once(startWaitSeconds).Subscribe(_ => {
-                nextRoomEntry = startingEntry;
-                nextRoom = nextRoomEntry.GetComponentInParent<Room>();
-                lastPos = transform.position;
-                updateSubscription = Time.ElapsedIntervals(1 / updateFrequency).Subscribe(__ => Move());
-            });
-        }
-
         private void Move() {
             if(Vector3.Distance(transform.position, lastPos) > instantiateDistance) {
                 lastPos = transform.position;
@@ -95,12 +86,31 @@ namespace TheDarkNight.Darkness {
             Destroy(this.gameObject);
         }
 
-        public void Hide() {
-            this.gameObject.SetActive(false);
+        public void SetHidden(bool hidden) {
+            this.enabled = !hidden;
+            this.GetComponent<MeshRenderer>().enabled = !hidden;
         }
 
         private void OnDestroy() {
             updateSubscription.Dispose();
+        }
+
+        private void OnDisable() {
+            updateSubscription.Dispose();
+        }
+
+        private void Start() {
+            Time.Once(startWaitSeconds).Subscribe(_ => {
+                nextRoomEntry = startingEntry;
+                nextRoom = nextRoomEntry.GetComponentInParent<Room>();
+                lastPos = transform.position;
+                updateSubscription = Time.ElapsedIntervals(1 / updateFrequency).Subscribe(__ => Move());
+            });
+        }
+
+        private void OnEnable() {
+            if(Time != null)
+                Start();
         }
     }
 }
