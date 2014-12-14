@@ -2,6 +2,7 @@ using System.Linq;
 using TheDarkNight.Extensions;
 using TheDarkNight.FlashLight;
 using TheDarkNight.Picking;
+using UniRx;
 using UnityEngine;
 
 namespace TheDarkNight.Lights {
@@ -11,9 +12,17 @@ namespace TheDarkNight.Lights {
         private Light pointLight;
         private bool intact = true;
 
+        private ISubject<Unit> destroyed = new Subject<Unit>();
+
+        public IObservable<Unit> Destroyed {
+            get { return destroyed; }
+        }
+
         public void Destroy() {
             if(CanTurnOff())
                 TurnOff();
+
+            destroyed.OnNext(Unit.Default);
             intact = false;
         }
 
