@@ -1,4 +1,6 @@
+using ModestTree.Zenject;
 using TheDarkNight.Extensions;
+using TheDarkNight.Observables.Time;
 using UniRx;
 using UnityEngine;
 
@@ -12,6 +14,8 @@ namespace TheDarkNight.Lights {
 
         private ISubject<ILightSource> turnOff = new Subject<ILightSource>();
 
+        private ISubject<Unit> lightBulbDestroyed = new Subject<Unit>();
+
         [SerializeField]
         private LightBulb initialLightBulb;
 
@@ -20,11 +24,18 @@ namespace TheDarkNight.Lights {
 
         private ILightBulb lightBulb;
 
+        [Inject]
+        public IObservableTime Time { get; set; }
+
         public IObservable<ILightBulb> NewBulb { get { return newBulb; } }
 
         public IObservable<ILightSource> TurnedOn { get { return turnOn; } }
 
         public IObservable<ILightSource> TurnedOff { get { return turnOff; } }
+
+        public IObservable<Unit> LightBulbDestroyed {
+            get { return lightBulbDestroyed; }
+        }
 
         public bool CanTurnOn() {
             return lightBulb != null && lightBulb.CanTurnOn();
@@ -45,12 +56,15 @@ namespace TheDarkNight.Lights {
         }
 
         public bool TryInsertLightBulb(ILightBulb lightBulb) {
-            if(this.lightBulb == null) {
+            if(CanInsert(lightBulb)) {
                 this.lightBulb = lightBulb;
-                newBulb.OnNext(lightBulb);
-                lightBulb.GetTransform().parent = transform;
-                lightBulb.GetTransform().position = lightBulbTransform.position;
-                lightBulb.GetTransform().rotation = lightBulbTransform.rotation;
+                lightBulb.Destroyed.Subscribe(lightBulbDestroyed);
+                Time.Once(1.6f).Subscribe(_ => {
+                    newBulb.OnNext(lightBulb);
+                    lightBulb.GetTransform().parent = transform;
+                    lightBulb.GetTransform().position = lightBulbTransform.position;
+                    lightBulb.GetTransform().rotation = lightBulbTransform.rotation;
+                });
 
                 return true;
             }
@@ -59,6 +73,10 @@ namespace TheDarkNight.Lights {
 
         public Transform GetTransform() {
             return transform;
+        }
+
+        public bool CanInsert(ILightBulb lightBulb) {
+            return this.lightBulb == null;
         }
 
         private void OnTriggerEnter(Collider collider) {

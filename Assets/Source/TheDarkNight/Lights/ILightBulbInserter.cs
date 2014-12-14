@@ -4,7 +4,9 @@ namespace TheDarkNight.Lights {
 
     public interface ILightBulbInserter {
 
-        IObservable<Unit> InsertedLightBulb { get; }
+        IObservable<ILightSource> Insertable { get; }
+
+        IObservable<ILightSource> InsertedLightBulb { get; }
 
         bool TryInsertLightBulb();
 

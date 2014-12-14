@@ -1,22 +1,16 @@
-using UnityEngine;
-using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
-using TheDarkNight.Picking;
+using System.Linq;
 using TheDarkNight.Extensions;
-using UniRx;
+using TheDarkNight.Picking;
+using UnityEngine;
 
 namespace TheDarkNight.FlashLight {
-    
+
     public class FlashLight : MonoBehaviour, IFlashLight {
         private bool turnedOn = false;
         private IInventory inventory;
         private List<IBattery> batteries;
         private IBattery batteryInUse;
-
-        private void Start() {
-            inventory = this.TryGetComponentInParent<Inventory>();
-        }
 
         public bool TryTurnOn() {
             if(!turnedOn && TryUseNewBattery()) {
@@ -40,6 +34,14 @@ namespace TheDarkNight.FlashLight {
             if(!TryTurnOff()) {
                 TryTurnOn();
             }
+        }
+
+        public float GetBatteryLoad() {
+            return batteries != null ? batteries.Select(b => b.GetRemainingTime()).Sum() : 0f;
+        }
+
+        private void Start() {
+            inventory = this.TryGetComponentInParent<Inventory>();
         }
 
         private void Update() {
@@ -71,7 +73,7 @@ namespace TheDarkNight.FlashLight {
 
             if(batteryLoad <= 0)
                 return false;
-            
+
             batteryInUse = batteries.Where(b => b.GetRemainingTime() > 0).First();
             return true;
         }
