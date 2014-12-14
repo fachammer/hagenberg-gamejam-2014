@@ -10,12 +10,17 @@ namespace TheDarkNight.Picking {
     public class DropperController : MonoBehaviour {
 
         [SerializeField]
-        private string dropAxisName;
+        private string dropKeyboardAxisName;
+
+        [SerializeField]
+        private string dropJoystickAxisName;
 
         private void Start() {
             IAxesManager axesManager = this.TryGetClass<IAxesManager>();
-            IObservableAxis dropAxis = axesManager.GetAxis(dropAxisName);
-            dropAxis.DistinctUntilChanged().Subscribe(Trydrop);
+            IObservableAxis dropAxisKeyboard = axesManager.GetAxis(dropKeyboardAxisName);
+            IObservableAxis dropAxisJoystick = axesManager.GetAxis(dropJoystickAxisName);
+            dropAxisKeyboard.DistinctUntilChanged().Subscribe(Trydrop);
+            dropAxisJoystick.DistinctUntilChanged().Subscribe(Trydrop);
         }
 
         private void Trydrop(float value) {
