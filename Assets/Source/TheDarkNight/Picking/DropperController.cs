@@ -19,8 +19,11 @@ namespace TheDarkNight.Picking {
             IAxesManager axesManager = this.TryGetClass<IAxesManager>();
             IObservableAxis dropAxisKeyboard = axesManager.GetAxis(dropKeyboardAxisName);
             IObservableAxis dropAxisJoystick = axesManager.GetAxis(dropJoystickAxisName);
-            dropAxisKeyboard.DistinctUntilChanged().Subscribe(Trydrop);
-            dropAxisJoystick.DistinctUntilChanged().Subscribe(Trydrop);
+
+            if(Input.GetJoystickNames().Length < 2)
+                dropAxisKeyboard.DistinctUntilChanged().Subscribe(Trydrop);
+            else
+                dropAxisJoystick.DistinctUntilChanged().Subscribe(Trydrop);
         }
 
         private void Trydrop(float value) {
