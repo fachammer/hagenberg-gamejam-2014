@@ -1,9 +1,9 @@
-using UnityEngine;
-using System.Collections;
 using TheDarkNight.Extensions;
 using UniRx;
+using UnityEngine;
 
 namespace TheDarkNight.Lights {
+
     public class GeneratorSwitch : MonoBehaviour, ISwitch {
 
         [SerializeField]
