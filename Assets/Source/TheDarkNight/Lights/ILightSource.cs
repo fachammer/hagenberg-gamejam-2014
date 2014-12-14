@@ -5,6 +5,8 @@ namespace TheDarkNight.Lights {
 
     public interface ILightSource {
 
+        IObservable<Unit> LightBulbDestroyed { get; }
+
         IObservable<ILightSource> TurnedOn { get; }
 
         IObservable<ILightSource> TurnedOff { get; }
@@ -20,6 +22,8 @@ namespace TheDarkNight.Lights {
         void TurnOff();
 
         bool TryInsertLightBulb(ILightBulb lightBulb);
+
+        bool CanInsert(ILightBulb lightBulb);
 
         Transform GetTransform();
     }
