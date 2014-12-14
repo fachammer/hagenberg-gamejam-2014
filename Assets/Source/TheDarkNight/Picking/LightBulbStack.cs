@@ -11,9 +11,6 @@ namespace TheDarkNight.Picking {
     [RequireComponent(typeof(Collider))]
     public class LightBulbStack : MonoBehaviour {
 
-        [SerializeField]
-        private GameObject lightBulbPrefab;
-
         private IPicker picker;
         private IInventory inventory;
 

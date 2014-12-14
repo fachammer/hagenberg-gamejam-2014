@@ -1,0 +1,142 @@
+fileFormatVersion: 2
+guid: 55e147118cd11064a85563aaf3608897
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Base
+    100002: Bone017
+    100004: Bone019
+    100006: Bone026
+    100008: Bone027
+    100010: Bone028
+    100012: Bone029
+    100014: Bone031
+    100016: Bone033
+    100018: Bone034
+    100020: Bone035
+    100022: BoneCanon01
+    100024: BoneCylinder1Bottom
+    100026: BoneCylinder1Top
+    100028: BoneCylinder2Bottom
+    100030: BoneCylinder2Top
+    100032: BoneSkull
+    100034: BoneTowerHead
+    100036: Canon
+    100038: CylinderLeft
+    100040: CylinerRight
+    100042: Flag
+    100044: Flag001
+    100046: Flag002
+    100048: Flag003
+    100050: Flagg
+    100052: //RootNode
+    100054: RootBone
+    100056: Skull
+    400000: Base
+    400002: Bone017
+    400004: Bone019
+    400006: Bone026
+    400008: Bone027
+    400010: Bone028
+    400012: Bone029
+    400014: Bone031
+    400016: Bone033
+    400018: Bone034
+    400020: Bone035
+    400022: BoneCanon01
+    400024: BoneCylinder1Bottom
+    400026: BoneCylinder1Top
+    400028: BoneCylinder2Bottom
+    400030: BoneCylinder2Top
+    400032: BoneSkull
+    400034: BoneTowerHead
+    400036: Canon
+    400038: CylinderLeft
+    400040: CylinerRight
+    400042: Flag
+    400044: Flag001
+    400046: Flag002
+    400048: Flag003
+    400050: Flagg
+    400052: //RootNode
+    400054: RootBone
+    400056: Skull
+    2300000: Base
+    2300002: Flag
+    2300004: Flag001
+    2300006: Flag002
+    2300008: Flag003
+    3300000: Base
+    3300002: Flag
+    3300004: Flag001
+    3300006: Flag002
+    3300008: Flag003
+    4300000: Base
+    4300002: Canon
+    4300004: Skull
+    4300006: Flag001
+    4300008: Flag
+    4300010: Flag003
+    4300012: Flag002
+    4300014: CylinerRight
+    4300016: CylinderLeft
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Canon
+    13700002: CylinderLeft
+    13700004: CylinerRight
+    13700006: Skull
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00300000003
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

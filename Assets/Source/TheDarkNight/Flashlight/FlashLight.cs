@@ -83,7 +83,7 @@ namespace TheDarkNight.FlashLight {
         }
 
         private void DrawLight(bool lightEnabled) {
-            Light light = this.TryGetComponent<Light>();
+            Light light = this.TryGetComponentsInChildren<Light>().First();
             light.enabled = lightEnabled;
             GetComponentsInChildren<MeshRenderer>().First().enabled = lightEnabled;
             GetComponentsInChildren<DarknessHider>().First().collider.enabled = lightEnabled;
