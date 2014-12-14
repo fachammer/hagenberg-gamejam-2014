@@ -319,6 +319,9 @@ GameObject:
   - 114: {fileID: 11400030}
   - 114: {fileID: 11400032}
   - 114: {fileID: 11400034}
+  - 114: {fileID: 11400048}
+  - 114: {fileID: 11400046}
+  - 114: {fileID: 11400050}
   m_Layer: 8
   m_Name: player1
   m_TagString: Untagged
@@ -1099,18 +1102,34 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100142
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400142}
+  - 108: {fileID: 10800000}
+  m_Layer: 0
+  m_Name: Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: -3.56213292e-07, y: 1.43084321e-07, z: -1, w: -4.9531144e-07}
-  m_LocalPosition: {x: -0, y: -.287999988, z: .310000002}
-  m_LocalScale: {x: .5, y: .620000005, z: .560000002}
+  m_LocalRotation: {x: 1.33158053e-07, y: 3.99474175e-07, z: -5.31932049e-14, w: 1}
+  m_LocalPosition: {x: .163000003, y: -.88499999, z: .210999995}
+  m_LocalScale: {x: .25, y: .200000003, z: .25}
   m_Children: []
   m_Father: {fileID: 400140}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &400002
 Transform:
   m_ObjectHideFlags: 1
@@ -1360,7 +1379,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.92000008, y: -.839999974, z: -1.00999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400026}
@@ -2018,9 +2037,22 @@ Transform:
   m_LocalPosition: {x: -7.15255721e-09, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 400142}
   - {fileID: 400000}
   m_Father: {fileID: 400026}
   m_RootOrder: 3
+--- !u!4 &400142
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100142}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
+  m_LocalPosition: {x: .143000007, y: 0, z: .209999993}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400140}
+  m_RootOrder: 0
 --- !u!17 &1700000
 Pipeline:
   m_ObjectHideFlags: 1
@@ -2033,7 +2065,7 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_LightmapIndex: 255
@@ -2077,10 +2109,10 @@ BoxCollider:
   m_GameObject: {fileID: 100000}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 5.46340132, z: 2.00000048}
-  m_Center: {x: 0, y: 1.73169935, z: 9.53674316e-07}
+  m_Size: {x: 1, y: 6, z: 1.5}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!65 &6500002
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2091,8 +2123,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .475823224, y: 1.2545507, z: .705310524}
-  m_Center: {x: -.0122641623, y: .593268275, z: .0242219865}
+  m_Size: {x: .300000012, y: .300000012, z: .600000024}
+  m_Center: {x: -.0122641623, y: .150000006, z: .0242219865}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -2108,6 +2140,41 @@ Animator:
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!108 &10800000
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100142}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Type: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 8
+  m_Range: 2.35275578
+  m_SpotAngle: 54.1963348
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_Strength: 1
+    m_Bias: .0500000007
+    m_Softness: 4
+    m_SoftnessFade: 1
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_ActuallyLightmapped: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 1
+  m_ShadowSamples: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_IndirectIntensity: 1
+  m_AreaSize: {x: 1, y: 1}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2168,11 +2235,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSettings:
-    maxHorizontalSpeed: 5
+    maxHorizontalSpeed: 2
     depthMovementForce: 1000
-    maxDepthMovementSpeed: 10
+    maxDepthMovementSpeed: 5
     depthLayers: 2
-    depthLayerWidth: 3
+    depthLayerWidth: 1.5
     depthCollisionLayers:
       serializedVersion: 2
       m_Bits: 4294967295
@@ -2394,6 +2461,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 459e08048eca58f4f9f89d8a9b19d725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11400046
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9811f9c48d8d39646a77a3adc46721f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropKeyboardAxisName: Action1Keyboard
+  dropJoystickAxisName: Action1Joystick
+--- !u!114 &11400048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca76634e1234da74497141433bdc6e65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11400050
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a27439ff5268d46857b87d1881029b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kill: 0
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
