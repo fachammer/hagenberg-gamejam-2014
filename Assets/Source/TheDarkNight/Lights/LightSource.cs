@@ -65,7 +65,6 @@ namespace TheDarkNight.Lights {
                     lightBulb.GetTransform().position = lightBulbTransform.position;
                     lightBulb.GetTransform().rotation = lightBulbTransform.rotation;
                 });
-
                 return true;
             }
             return false;
@@ -92,8 +91,15 @@ namespace TheDarkNight.Lights {
         }
 
         private void Start() {
-            this.lightBulb = initialLightBulb;
             collider.isTrigger = true;
+            this.lightBulb = initialLightBulb;
+            if(this.lightBulb != null)
+                newBulb.OnNext(this.lightBulb);
+        }
+
+
+        public void SetBulbNull() {
+            this.lightBulb = null;
         }
     }
 }

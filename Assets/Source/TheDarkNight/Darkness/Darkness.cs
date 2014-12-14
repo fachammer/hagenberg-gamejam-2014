@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using ModestTree.Zenject;
 using TheDarkNight.Observables.Time;
+using TheDarkNight.Extensions;
 using System;
 using System.Linq;
 using UniRx;
@@ -14,6 +15,7 @@ namespace TheDarkNight.Darkness {
     [RequireComponent(typeof(Rigidbody))]
     public class Darkness : MonoBehaviour, IDarkness {
         private IDisposable updateSubscription = Disposable.Empty;
+        private IDisposable subscription = Disposable.Empty;
         private Transform nextRoomEntry;
         private Room nextRoom;
         private Vector3 lastPos;
@@ -102,14 +104,16 @@ namespace TheDarkNight.Darkness {
 
         private void OnDestroy() {
             updateSubscription.Dispose();
+            subscription.Dispose();
         }
 
         private void OnDisable() {
             updateSubscription.Dispose();
+            subscription.Dispose();
         }
 
         private void Start() {
-            Time.Once(startWaitSeconds).Subscribe(_ => {
+            subscription = Time.Once(startWaitSeconds).Subscribe(_ => {
                 nextRoomEntry = startingEntry;
                 nextRoom = nextRoomEntry.GetComponentInParent<Room>();
                 lastPos = transform.position;

@@ -27,8 +27,9 @@ namespace TheDarkNight.Picking {
         }
 
         private void Trydrop(float value) {
-            if(value > 0)
+            if(value > 0) {
                 this.TryGetClass<IDropper>().TryDropLightBulb();
+            }
         }
     }
 }

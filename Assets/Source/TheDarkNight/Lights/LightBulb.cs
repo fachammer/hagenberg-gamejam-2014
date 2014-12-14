@@ -10,7 +10,6 @@ namespace TheDarkNight.Lights {
     [RequireComponent(typeof(DarknessHider))]
     public class LightBulb : Pickable, ILightBulb {
         private Light pointLight;
-        private bool intact = true;
 
         private ISubject<Unit> destroyed = new Subject<Unit>();
 
@@ -19,19 +18,16 @@ namespace TheDarkNight.Lights {
         }
 
         public void Destroy() {
-            if(CanTurnOff())
-                TurnOff();
-
             destroyed.OnNext(Unit.Default);
-            intact = false;
+            Destroy(this.gameObject);
         }
 
         public bool CanTurnOn() {
-            return intact && !pointLight.enabled;
+            return !pointLight.enabled;
         }
 
         public bool CanTurnOff() {
-            return intact && pointLight.enabled;
+            return pointLight.enabled;
         }
 
         public void TurnOn() {
