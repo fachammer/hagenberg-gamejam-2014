@@ -23,6 +23,7 @@ namespace TheDarkNight.Picking {
             picker = other.GetClass<IPicker>();
             if(picker != null) {
                 ILightBulb lightBulb = inventory.GetItems().Where(i => i is ILightBulb).First() as ILightBulb;
+                Debug.Log(lightBulb);
                 if(lightBulb != null)
                     picker.CanPickupPickable(lightBulb);
             }

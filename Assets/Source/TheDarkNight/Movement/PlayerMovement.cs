@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UniRx;
 using UnityEngine;
 
@@ -60,7 +60,7 @@ namespace TheDarkNight.Movement {
         }
 
         private bool IsObstacleInDepthDirection(float direction) {
-            float collisionRadius = rigidbody.collider.bounds.size.magnitude / 2;
+            float collisionRadius = rigidbody.collider.bounds.size.magnitude / 4;
             float collisionDistance = settings.depthLayerWidth + rigidbody.collider.bounds.size.z / 2;
             RaycastHit hit;
             return Physics.SphereCast(rigidbody.position, collisionRadius, new Vector3(0, 0, direction), out hit, collisionDistance, settings.depthCollisionLayers);

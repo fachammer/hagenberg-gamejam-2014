@@ -48,10 +48,15 @@ namespace TheDarkNight.Darkness {
         public void SetValues(Transform startingEntry) {
             this.startingEntry = startingEntry;
         }
+
+        private void Update() {
+            transform.Rotate(0, 5 * UnityEngine.Time.deltaTime, 0);
+        }
+
         private void Move() {
             if(Vector3.Distance(transform.position, lastPos) > instantiateDistance) {
                 lastPos = transform.position;
-                GameObject newDarkness = GOI.Instantiate(darknessDummyPrefab, this.transform.position, Quaternion.Euler(new Vector3(0,0,90)));
+                GameObject newDarkness = GOI.Instantiate(darknessDummyPrefab, this.transform.position, Quaternion.identity);
                 newDarkness.transform.position = this.transform.position;
             }
 

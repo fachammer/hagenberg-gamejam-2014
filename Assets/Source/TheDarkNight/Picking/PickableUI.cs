@@ -1,4 +1,5 @@
-﻿using TheDarkNight.Extensions;
+using TheDarkNight.Extensions;
+using TheDarkNight.Lights;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,7 +25,16 @@ namespace TheDarkNight.Picking {
         }
 
         private void HandleCanPickup(IPickable pickable) {
-            image.enabled = pickable != null && pickable == this.pickable;
+            Pickable p = this.pickable as Pickable;
+
+            if(pickable == null)
+                image.enabled = false;
+            else if(p != null && p.GetComponent<LightBulbStack>() != null) {
+                image.enabled = true;
+            }
+            else {
+                image.enabled = pickable != null && pickable == this.pickable;
+            }
         }
     }
 }
