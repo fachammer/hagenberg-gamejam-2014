@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TheDarkNight.Extensions;
+using TheDarkNight.Lights;
 using TheDarkNight.Picking;
 using UnityEngine;
 
@@ -13,6 +14,9 @@ namespace TheDarkNight.FlashLight {
         private IBattery batteryInUse;
 
         public bool TryTurnOn() {
+            if(inventory.GetItems().Where(i => i is ILightBulb).Count() > 0)
+                return false;
+
             if(!turnedOn && TryUseNewBattery()) {
                 DrawLight(true);
                 turnedOn = true;
@@ -86,7 +90,7 @@ namespace TheDarkNight.FlashLight {
             Light light = this.TryGetComponentsInChildren<Light>().First();
             light.enabled = lightEnabled;
             GetComponentsInChildren<MeshRenderer>(true).First().enabled = lightEnabled;
-            GetComponentsInChildren<DarknessHider>(true).First().collider.enabled = lightEnabled;
+            GetComponentsInChildren<DarknessKiller>(true).First().collider.enabled = lightEnabled;            
         }
     }
 }

@@ -12,7 +12,6 @@ GameObject:
   - 23: {fileID: 2300000}
   - 65: {fileID: 6500000}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11400002}
   - 54: {fileID: 5400000}
   - 82: {fileID: 8200000}
   m_Layer: 9
@@ -165,17 +164,6 @@ MonoBehaviour:
   minSpeed: .00200000009
   instantiateDistance: .5
   startWaitSeconds: 1
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bca29ffa9aa49fc4ba4289c10db14201, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

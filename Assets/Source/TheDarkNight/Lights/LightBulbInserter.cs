@@ -31,10 +31,6 @@ namespace TheDarkNight.Lights {
         public bool TryInsertLightBulb() {
             if(IsInsertPossible()) {
 
-                Dropper d = GetComponent<Dropper>();
-                d.enabled = false;
-                Time.Once(0.5f).Subscribe(_ => d.enabled = true);
-
                 ILightBulb lightBulb = GetLightBulb();
                 lightSource.Value.TryInsertLightBulb(lightBulb);
                 insertedLightBulb.OnNext(lightSource.Value);
