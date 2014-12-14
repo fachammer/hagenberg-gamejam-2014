@@ -319,9 +319,9 @@ GameObject:
   - 114: {fileID: 11400030}
   - 114: {fileID: 11400032}
   - 114: {fileID: 11400034}
+  - 114: {fileID: 11400050}
   - 114: {fileID: 11400048}
   - 114: {fileID: 11400046}
-  - 114: {fileID: 11400050}
   m_Layer: 8
   m_Name: player1
   m_TagString: Untagged
@@ -1379,7 +1379,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.92000008, y: -.839999974, z: -1.00999999}
+  m_LocalPosition: {x: 3.523, y: -.839999974, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400026}
@@ -2034,7 +2034,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100140}
   m_LocalRotation: {x: -.707106829, y: 0, z: -0, w: .707106829}
-  m_LocalPosition: {x: -7.15255721e-09, y: 0, z: 0}
+  m_LocalPosition: {x: -7.15255721e-09, y: 0, z: .192000002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400142}
@@ -2123,8 +2123,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .300000012, y: .300000012, z: .600000024}
-  m_Center: {x: -.0122641623, y: .150000006, z: .0242219865}
+  m_Size: {x: .300000012, y: .300000012, z: .300000012}
+  m_Center: {x: 0, y: .150000006, z: 0}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -2237,7 +2237,7 @@ MonoBehaviour:
   movementSettings:
     maxHorizontalSpeed: 2
     depthMovementForce: 1000
-    maxDepthMovementSpeed: 5
+    maxDepthMovementSpeed: 7
     depthLayers: 2
     depthLayerWidth: 1.5
     depthCollisionLayers:
@@ -2353,6 +2353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxBatteries: 3
   maxLightBulbs: 1
+  battery: {fileID: 11400000, guid: 48d11a97249875e46a141cbafacf9696, type: 2}
 --- !u!114 &11400028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2496,7 +2497,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52a27439ff5268d46857b87d1881029b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kill: 0
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
