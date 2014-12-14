@@ -7,6 +7,7 @@ namespace TheDarkNight.Movement {
     internal class PlayerMovement : IMovement {
         private Rigidbody rigidbody;
         private Settings settings;
+        private AudioSource audio;
         private int currentLayer = 0;
 
         private ISubject<float> horizontalMovement = new Subject<float>();
@@ -24,9 +25,10 @@ namespace TheDarkNight.Movement {
             get { return currentLayer * settings.depthLayerWidth; }
         }
 
-        public PlayerMovement(Rigidbody rigidbody, Settings settings) {
+        public PlayerMovement(Rigidbody rigidbody, AudioSource audioSource, Settings settings) {
             this.rigidbody = rigidbody;
             this.settings = settings;
+            this.audio = audioSource;
         }
 
         public void MoveHorizontally(float movementScale) {
@@ -36,6 +38,9 @@ namespace TheDarkNight.Movement {
             rigidbody.velocity += new Vector3(settings.maxHorizontalSpeed * movementScale, 0, 0);
             ClampVelocity();
 
+            if(movementScale != 0)
+                audio.Play();
+            
             horizontalMovement.OnNext(movementScale);
         }
 
@@ -48,6 +53,7 @@ namespace TheDarkNight.Movement {
             if(!IsPlayerNearTargetLayer() && !IsPlayerMovingInDepth() && !IsObstacleInDepthDirection(movementScale)) {
                 rigidbody.constraints &= ~RigidbodyConstraints.FreezePositionZ;
                 rigidbody.AddForce(new Vector3(0, 0, settings.depthMovementForce * Sign(movementScale)));
+                audio.Play();
             }
         }
 

@@ -19,11 +19,14 @@ namespace TheDarkNight.Lights {
         }
 
         public void Toggle() {
+            
             if(!turnedOn && lightSource.CanTurnOn()) {
+                audio.Play();
                 turnedOn = true;
                 lightSource.TurnOn();
             }
             else if(lightSource.CanTurnOff()) {
+                audio.Play();
                 turnedOn = false;
                 lightSource.TurnOff();
             }

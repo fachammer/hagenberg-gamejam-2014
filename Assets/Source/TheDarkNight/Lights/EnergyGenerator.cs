@@ -37,6 +37,7 @@ namespace TheDarkNight.Lights {
             activeLights++;
             if(activeLights > maxActiveLights) {
                 broke.OnNext(Unit.Default);
+                audio.Play();
                 lightSources.Do(source => {
                     if(source.CanTurnOff()) {
                         source.TurnOff();

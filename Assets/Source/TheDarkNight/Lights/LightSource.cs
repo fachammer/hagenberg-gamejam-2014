@@ -93,8 +93,9 @@ namespace TheDarkNight.Lights {
         private void Start() {
             collider.isTrigger = true;
             this.lightBulb = initialLightBulb;
-            if(this.lightBulb != null)
+            if(this.lightBulb != null) {
                 newBulb.OnNext(this.lightBulb);
+            }
         }
 
 

@@ -9,54 +9,25 @@ using System;
 
 namespace TheDarkNight.Lights {
 
-    [RequireComponent(typeof(ILightSource))]
     public class LightDestruction : MonoBehaviour {
 
-        [Inject]
-        public IObservableTime Time { get; set; }
-
-        private ILightSource lightSource;
-        private ILightBulb lightBulb;
-        private bool lightsOn = false;
-
-        [SerializeField]
-        private float minRunTimeSeconds;
-
-        [SerializeField]
-        private float maxRunTimeSeconds;
 
         private float runTime;
 
-        private void Start() {
-            lightSource = this.TryGetClass<ILightSource>();
-            lightSource.NewBulb.Subscribe(NewBulb);
-            lightSource.TurnedOn.Subscribe(_ => lightsOn = true);
-            lightSource.TurnedOff.Subscribe(_ => lightsOn = false);
-        }
 
         private void Update() {
-            if(lightsOn) {
+            if(this.GetComponentInChildren<Light>().enabled) {
                 runTime -= UnityEngine.Time.deltaTime;
                 if(runTime <= 0.0f) {
-                    DestroyBulb();
-                    lightsOn = false;
+                    GetComponentInParent<LightSource>().SetBulbNull();
+
+                    Destroy(this.gameObject);
                 }
             }
         }
 
-        private void NewBulb(ILightBulb lightBulb) {
-            this.lightBulb = lightBulb;
-            CalculateRuntime();
-        }
-
-        private void CalculateRuntime() {
-            runTime = UnityEngine.Random.Range(minRunTimeSeconds, maxRunTimeSeconds);
-        }
-
-        private void DestroyBulb() {
-            lightSource.SetBulbNull();
-            if(lightBulb != null)
-                lightBulb.Destroy();
+        private void Start() {
+            runTime = UnityEngine.Random.Range(15f, 30f - 1f);
         }
     }
 
