@@ -12,17 +12,5 @@ namespace TheDarkNight.Lights {
         public void Activate() {
             GetComponentInParent<Room>().ClearDarkness();
         }
-
-        private void OnTriggerEnter(Collider other) {
-            if(other.GetComponent<Darkness.Darkness>() != null) {
-                Destroy(other.gameObject);
-            }
-        }
-
-        private void OnTriggerStay(Collider other) {
-            if(other.GetComponent<Darkness.Darkness>() != null) {
-                Destroy(other.gameObject);
-            }
-        }
     }
 }

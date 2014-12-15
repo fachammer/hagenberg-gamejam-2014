@@ -8,7 +8,7 @@ namespace TheDarkNight.Rooms {
 
     [RequireComponent(typeof(Collider))]
     public class Room : MonoBehaviour, IRoom {
-        public bool enlightened = false;
+        public bool enlightened {get { return lightSource.CanTurnOff(); } }
 
         [SerializeField]
         private LightSource lightSource;
@@ -29,8 +29,6 @@ namespace TheDarkNight.Rooms {
 
         private void Start() {
             collider.isTrigger = true;
-            lightSource.TurnedOn.Subscribe(_ => enlightened = true);
-            lightSource.TurnedOff.Subscribe(_ => enlightened = false);
         }
 
         private void OnTriggerEnter(Collider other) {
@@ -42,6 +40,12 @@ namespace TheDarkNight.Rooms {
         private void OnTriggerStay(Collider other) {
             if(other.GetComponent<Darkness.Darkness>() != null) {
                 darknessInTrigger.Add(other.GetComponent<Darkness.Darkness>());
+            }
+        }
+
+        private void OnTriggerExit(Collider other) {
+            if(other.GetComponent<Darkness.Darkness>() != null) {
+                darknessInTrigger.Remove(other.GetComponent<Darkness.Darkness>());
             }
         }
     }

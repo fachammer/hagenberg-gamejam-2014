@@ -37,9 +37,6 @@ namespace TheDarkNight.Movement {
 
             rigidbody.velocity += new Vector3(settings.maxHorizontalSpeed * movementScale, 0, 0);
             ClampVelocity();
-
-            if(movementScale != 0)
-                audio.Play();
             
             horizontalMovement.OnNext(movementScale);
         }
@@ -53,8 +50,8 @@ namespace TheDarkNight.Movement {
             if(!IsPlayerNearTargetLayer() && !IsPlayerMovingInDepth() && !IsObstacleInDepthDirection(movementScale)) {
                 rigidbody.constraints &= ~RigidbodyConstraints.FreezePositionZ;
                 rigidbody.AddForce(new Vector3(0, 0, settings.depthMovementForce * Sign(movementScale)));
-                audio.Play();
             }
+
         }
 
         public void Update() {
@@ -63,13 +60,20 @@ namespace TheDarkNight.Movement {
                 rigidbody.position = new Vector3(rigidbody.position.x, rigidbody.position.y, CurrentLayerDepth);
                 rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, 0f);
             }
+
+            if(IsPlayerMovingInDepth() || Mathf.Abs(rigidbody.velocity.x) > 0.1f) {
+                if(audio.isPlaying == false)
+                    audio.Play();
+            }
+            else
+                audio.Stop();
+
         }
 
         private bool IsObstacleInDepthDirection(float direction) {
             float collisionRadius = rigidbody.collider.bounds.size.magnitude / 4;
             float collisionDistance = settings.depthLayerWidth + rigidbody.collider.bounds.size.z / 2;
-            RaycastHit hit;
-            return Physics.Raycast(rigidbody.position, new Vector3(0, 0, direction), collisionDistance, settings.depthCollisionLayers);
+            return Physics.Raycast(rigidbody.position, new Vector3(0, 0, 10), collisionDistance, settings.depthCollisionLayers);
         }
 
         private bool IsPlayerMovingInDepth() {

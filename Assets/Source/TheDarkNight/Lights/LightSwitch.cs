@@ -7,7 +7,6 @@ namespace TheDarkNight.Lights {
 
     [RequireComponent(typeof(Collider))]
     public class LightSwitch : MonoBehaviour, ISwitch {
-        public IDisposable subscription = Disposable.Empty;
 
         [SerializeField]
         private LightSource lightSource;
@@ -19,7 +18,6 @@ namespace TheDarkNight.Lights {
         }
 
         public void Toggle() {
-            
             if(!turnedOn && lightSource.CanTurnOn()) {
                 audio.Play();
                 turnedOn = true;
@@ -50,7 +48,8 @@ namespace TheDarkNight.Lights {
         private void Start() {
             collider.isTrigger = true;
             lightSource.TurnedOff.Subscribe(_ => turnedOn = false);
-            subscription = lightSource.NewBulb.Subscribe(_ => turnedOn = false);
+            lightSource.BulbDestroyed.Subscribe(_ => turnedOn = false);
+            lightSource.NewBulb.Subscribe(_ => turnedOn = false);
         }
     }
 }

@@ -14,20 +14,19 @@ namespace TheDarkNight.Lights {
 
         private float runTime;
 
-
         private void Update() {
             if(this.GetComponentInChildren<Light>().enabled) {
                 runTime -= UnityEngine.Time.deltaTime;
                 if(runTime <= 0.0f) {
                     GetComponentInParent<LightSource>().SetBulbNull();
-
                     Destroy(this.gameObject);
                 }
             }
         }
 
         private void Start() {
-            runTime = UnityEngine.Random.Range(15f, 30f - 1f);
+            runTime = UnityEngine.Random.Range(30, 30);
+            Debug.Log("Set these variables back!");
         }
     }
 

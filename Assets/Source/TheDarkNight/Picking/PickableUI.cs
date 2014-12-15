@@ -24,7 +24,8 @@ namespace TheDarkNight.Picking {
         }
 
         private void Start() {
-           subscription = picker.CanPickup.Subscribe(HandleCanPickup);
+            if(picker != null)
+                subscription = picker.CanPickup.Subscribe(HandleCanPickup);
         }
 
         private void OnDestroy() {
@@ -34,13 +35,9 @@ namespace TheDarkNight.Picking {
         private void HandleCanPickup(IPickable pickable) {
             if(!gameObject.activeInHierarchy)
                 return;
-            Pickable p = this.pickable as Pickable;
 
             if(pickable == null)
                 image.enabled = false;
-            /*else if(p != null && p.GetComponent<LightBulbStack>() != null) {
-                image.enabled = true;
-            }*/
             else {
                 image.enabled = pickable != null && pickable == this.pickable;
             }

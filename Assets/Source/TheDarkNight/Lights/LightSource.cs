@@ -1,6 +1,7 @@
 using ModestTree.Zenject;
 using TheDarkNight.Extensions;
 using TheDarkNight.Observables.Time;
+using TheDarkNight.Rooms;
 using UniRx;
 using UnityEngine;
 
@@ -10,28 +11,29 @@ namespace TheDarkNight.Lights {
     public class LightSource : MonoBehaviour, ILightSource {
         private ISubject<ILightBulb> newBulb = new Subject<ILightBulb>();
 
+        private ISubject<Unit> bulbDestroyed = new Subject<Unit>();
+
         private ISubject<ILightSource> turnOn = new Subject<ILightSource>();
 
         private ISubject<ILightSource> turnOff = new Subject<ILightSource>();
 
         private ISubject<Unit> lightBulbDestroyed = new Subject<Unit>();
 
-        [SerializeField]
-        private LightBulb initialLightBulb;
 
         [SerializeField]
         private Transform lightBulbTransform;
 
-        private ILightBulb lightBulb;
+        public LightBulb lightBulb;
+        public GameObject sparks;
 
         [Inject]
         public IObservableTime Time { get; set; }
 
         public IObservable<ILightBulb> NewBulb { get { return newBulb; } }
-
+        public IObservable<Unit> BulbDestroyed { get { return bulbDestroyed; } }
         public IObservable<ILightSource> TurnedOn { get { return turnOn; } }
-
         public IObservable<ILightSource> TurnedOff { get { return turnOff; } }
+
 
         public IObservable<Unit> LightBulbDestroyed {
             get { return lightBulbDestroyed; }
@@ -55,26 +57,21 @@ namespace TheDarkNight.Lights {
             turnOff.OnNext(this);
         }
 
-        public bool TryInsertLightBulb(ILightBulb lightBulb) {
-            if(CanInsert(lightBulb)) {
+        public void InsertLightBulb(LightBulb lightBulb) {
+            Time.Once(1.5f).Subscribe(_ => {
+                lightBulb.GetTransform().parent = transform;
+                lightBulb.GetTransform().position = lightBulbTransform.position;
+                lightBulb.GetTransform().rotation = lightBulbTransform.rotation;
                 this.lightBulb = lightBulb;
-                lightBulb.Destroyed.Subscribe(lightBulbDestroyed);
-                Time.Once(1.6f).Subscribe(_ => {
-                    newBulb.OnNext(lightBulb);
-                    lightBulb.GetTransform().parent = transform;
-                    lightBulb.GetTransform().position = lightBulbTransform.position;
-                    lightBulb.GetTransform().rotation = lightBulbTransform.rotation;
-                });
-                return true;
-            }
-            return false;
+                newBulb.OnNext(lightBulb);
+            });
         }
 
         public Transform GetTransform() {
             return transform;
         }
 
-        public bool CanInsert(ILightBulb lightBulb) {
+        public bool CanInsert(LightBulb lightBulb) {
             return this.lightBulb == null;
         }
 
@@ -92,14 +89,16 @@ namespace TheDarkNight.Lights {
 
         private void Start() {
             collider.isTrigger = true;
-            this.lightBulb = initialLightBulb;
-            if(this.lightBulb != null) {
-                newBulb.OnNext(this.lightBulb);
-            }
+            lightBulb = null;
         }
 
 
         public void SetBulbNull() {
+            Destroy(Instantiate(sparks, lightBulbTransform.position, Quaternion.Euler(90, 0, 0)), 2);
+
+            bulbDestroyed.OnNext(Unit.Default);
+            lightBulbDestroyed.OnNext(Unit.Default);
+            GetComponent<AudioSource>().Play();
             this.lightBulb = null;
         }
     }

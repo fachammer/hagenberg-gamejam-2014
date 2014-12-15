@@ -17,9 +17,13 @@ ModelImporter:
     400008: lade1
     400010: lade2
     400012: root
+    2300000: K__cheK__hlschrank
+    3300000: K__cheK__hlschrank
     4300000: K__cheK__hlschrank
+    6400000: K__cheK__hlschrank
     7400000: "K\xFCcheK\xFChlschrankArmature|K\xFChlschrankOpen"
     9500000: //RootNode
+    11100000: //RootNode
     13700000: K__cheK__hlschrank
   materials:
     importMaterials: 1
@@ -72,6 +76,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   additionalBone: 0
   userData: 

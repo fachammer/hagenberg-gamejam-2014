@@ -1,4 +1,4 @@
-﻿using TheDarkNight.Extensions;
+using TheDarkNight.Extensions;
 using TheDarkNight.Movement;
 using TheDarkNight.Observables.Input;
 using UniRx;
@@ -10,6 +10,8 @@ namespace TheDarkNight.PlayerController {
     [RequireComponent(typeof(IMovement))]
     public class MovementController : MonoBehaviour {
         private CompositeDisposable movementSubscriptions = new CompositeDisposable();
+
+        private bool deactivatedOnce = false;
 
         [SerializeField]
         private string horizontalMovementKeyboardAxis;
@@ -24,6 +26,11 @@ namespace TheDarkNight.PlayerController {
         private string depthMovementJoystickAxis;
 
         private IMovement playerMovement;
+
+        private void OnEnable() {
+            if(deactivatedOnce)
+                Start();
+        }
 
         private void Start() {
             playerMovement = this.TryGetClass<IMovement>();
@@ -45,6 +52,7 @@ namespace TheDarkNight.PlayerController {
         }
 
         private void OnDisable() {
+            deactivatedOnce = true;
             movementSubscriptions.Clear();
         }
 

@@ -1,4 +1,4 @@
-﻿using TheDarkNight.Extensions;
+using TheDarkNight.Extensions;
 using TheDarkNight.Lights;
 using UniRx;
 using UnityEngine;
@@ -13,13 +13,13 @@ namespace Assets.Source.TheDarkNight.Lights {
         [SerializeField]
         private LightBulbInserter inserter;
 
-        private ILightSource lightSource;
+        private LightSource lightSource;
 
         private bool bulbInserted = false;
 
         private void Awake() {
             image = this.TryGetComponent<Image>();
-            lightSource = this.TryGetClassInParent<ILightSource>();
+            lightSource = this.TryGetComponentInParent<LightSource>();
         }
 
         private void Start() {

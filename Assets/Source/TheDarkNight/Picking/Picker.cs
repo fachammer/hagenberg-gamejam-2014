@@ -1,5 +1,6 @@
 using ModestTree.Zenject;
 using TheDarkNight.Extensions;
+using TheDarkNight.FlashLight;
 using TheDarkNight.Observables.Time;
 using TheDarkNight.Utility;
 using UniRx;
@@ -44,8 +45,14 @@ namespace TheDarkNight.Picking {
                     clone.transform.position = pickable.Value.GetTransform().position;
                 }
 
+                if(pickable.Value.GetTransform().gameObject.name == "battery") {
+                    Transform parent = pickable.Value.GetTransform().parent;
+                    if(parent.GetComponent<UnityEngine.Animation>() != null)
+                        parent.GetComponent<UnityEngine.Animation>().Play();
+                }
+
                 pickable.Value.GetTransform().parent = this.transform;
-                pickable.Value.GetTransform().position = new Vector3(0, 0, -20);
+                pickable.Value.GetTransform().position = new Vector3(0, -50, 0);
                 picking.OnNext(pickable.Value);
                 pickable.Value.CannotBePickedupByOthersThan(this);
                 this.pickable.Value = null;

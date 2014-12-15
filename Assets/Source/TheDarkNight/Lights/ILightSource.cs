@@ -21,9 +21,9 @@ namespace TheDarkNight.Lights {
 
         void TurnOff();
 
-        bool TryInsertLightBulb(ILightBulb lightBulb);
+        void InsertLightBulb(LightBulb lightBulb);
 
-        bool CanInsert(ILightBulb lightBulb);
+        bool CanInsert(LightBulb lightBulb);
 
         Transform GetTransform();
 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using TheDarkNight.Darkness;
 using TheDarkNight.Extensions;
 using TheDarkNight.Lights;
 using TheDarkNight.Picking;
@@ -84,7 +85,7 @@ namespace TheDarkNight.FlashLight {
             Light light = this.TryGetComponentsInChildren<Light>().First();
             light.enabled = lightEnabled;
             GetComponentsInChildren<MeshRenderer>(true).First().enabled = lightEnabled;
-            GetComponentsInChildren<DarknessKiller>(true).First().collider.enabled = lightEnabled;            
+            GetComponentsInChildren<DarknessKillerFlashlight>(true).First().collider.enabled = lightEnabled;            
         }
     }
 }

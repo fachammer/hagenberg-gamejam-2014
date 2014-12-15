@@ -20,7 +20,6 @@ namespace TheDarkNight.Darkness {
                 DarknessSpawnpoint dsp =spawnpos[UnityEngine.Random.Range(0, spawnpos.Length)];
                 Darkness d = GOI.Instantiate(darknessPrefab).GetComponent<Darkness>(); 
                 d.transform.position = dsp.transform.position;
-                d.transform.rotation = dsp.transform.rotation;
                 d.SetValues(dsp.targetroom);
                 lastSpawn = Time.time;
             }

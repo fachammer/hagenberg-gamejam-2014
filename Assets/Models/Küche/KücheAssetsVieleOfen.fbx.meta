@@ -13,9 +13,13 @@ ModelImporter:
     400004: K__cheOfen
     400006: K__cheOfenArmature
     400008: root
+    2300000: K__cheOfen
+    3300000: K__cheOfen
     4300000: K__cheOfen
+    6400000: K__cheOfen
     7400000: "K\xFCcheOfenArmature|K\xFCchenOfenOpen"
     9500000: //RootNode
+    11100000: //RootNode
     13700000: K__cheOfen
   materials:
     importMaterials: 1
@@ -68,6 +72,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   additionalBone: 0
   userData: 

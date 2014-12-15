@@ -24,11 +24,12 @@ ModelImporter:
     400016: root
     400018: WhateverScale
     4300000: Generator
-    7400000: GeneratorArmature|GeneratorIdle
-    7400002: GeneratorArmature|GeneratorLoad1
-    7400004: GeneratorArmature|GeneratorLoad2
-    7400006: GeneratorArmature|GeneratorLoad3
+    7400000: GeneratorArmature|GeneratorLoad1
+    7400002: GeneratorArmature|GeneratorLoad2
+    7400004: GeneratorArmature|GeneratorLoad3
+    7400006: GeneratorArmature|GeneratorLoad4
     7400008: Generator|GeneratorIdle
+    7400010: GeneratorArmature|GeneratorLoad0
     9500000: //RootNode
     13700000: Generator
   materials:
@@ -46,7 +47,283 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: GeneratorArmature|GeneratorLoad1
+      takeName: GeneratorArmature|GeneratorIdle
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Generator
+        weight: 1
+      - path: GeneratorArmature
+        weight: 1
+      - path: GeneratorArmature/root
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/backscale
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/Keeper1
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/Keeper2
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/rohr
+        weight: 1
+      - path: GeneratorArmature/root/WhateverScale
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: GeneratorArmature|GeneratorLoad2
+      takeName: GeneratorArmature|GeneratorLoad1
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Generator
+        weight: 1
+      - path: GeneratorArmature
+        weight: 1
+      - path: GeneratorArmature/root
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/backscale
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/Keeper1
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/Keeper2
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/rohr
+        weight: 1
+      - path: GeneratorArmature/root/WhateverScale
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: GeneratorArmature|GeneratorLoad3
+      takeName: GeneratorArmature|GeneratorLoad2
+      firstFrame: 0
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Generator
+        weight: 1
+      - path: GeneratorArmature
+        weight: 1
+      - path: GeneratorArmature/root
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/backscale
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/Keeper1
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/Keeper2
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/rohr
+        weight: 1
+      - path: GeneratorArmature/root/WhateverScale
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: GeneratorArmature|GeneratorLoad4
+      takeName: GeneratorArmature|GeneratorLoad3
+      firstFrame: 0
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Generator
+        weight: 1
+      - path: GeneratorArmature
+        weight: 1
+      - path: GeneratorArmature/root
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/backscale
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/Keeper1
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/Keeper2
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/rohr
+        weight: 1
+      - path: GeneratorArmature/root/WhateverScale
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Generator|GeneratorIdle
+      takeName: Generator|GeneratorIdle
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Generator
+        weight: 1
+      - path: GeneratorArmature
+        weight: 1
+      - path: GeneratorArmature/root
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/backscale
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/Keeper1
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/Keeper2
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/rohr
+        weight: 1
+      - path: GeneratorArmature/root/WhateverScale
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: GeneratorArmature|GeneratorLoad0
+      takeName: GeneratorArmature|GeneratorIdle
+      firstFrame: 0
+      lastFrame: .400000006
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Generator
+        weight: 1
+      - path: GeneratorArmature
+        weight: 1
+      - path: GeneratorArmature/root
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/backscale
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/Keeper1
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/Keeper2
+        weight: 1
+      - path: GeneratorArmature/root/boilerScale/rohr
+        weight: 1
+      - path: GeneratorArmature/root/WhateverScale
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []

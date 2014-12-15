@@ -30,9 +30,9 @@ namespace TheDarkNight.Lights {
 
         public bool TryInsertLightBulb() {
             if(IsInsertPossible()) {
-
-                ILightBulb lightBulb = GetLightBulb();
-                lightSource.Value.TryInsertLightBulb(lightBulb);
+                LightBulb lightBulb = GetLightBulb();
+                lightSource.Value.InsertLightBulb(lightBulb);
+                lightBulb.GetTransform().gameObject.AddComponent<LightDestruction>();
                 insertedLightBulb.OnNext(lightSource.Value);
                 inventory.RemoveItem(lightBulb);
                 return true;
@@ -42,7 +42,7 @@ namespace TheDarkNight.Lights {
         }
 
         public bool IsInsertPossible() {
-            ILightBulb lightBulb = GetLightBulb();
+            LightBulb lightBulb = GetLightBulb();
             if(lightSource.Value == null || lightBulb == null || !lightSource.Value.CanInsert(lightBulb))
                 return false;
 
@@ -57,8 +57,8 @@ namespace TheDarkNight.Lights {
             this.lightSource.Value = null;
         }
 
-        private ILightBulb GetLightBulb() {
-            return inventory.GetItems().Where(item => item is ILightBulb).FirstOrDefault() as ILightBulb;
+        private LightBulb GetLightBulb() {
+            return inventory.GetItems().Where(item => item is ILightBulb).FirstOrDefault() as LightBulb;
         }
 
         private void Awake() {

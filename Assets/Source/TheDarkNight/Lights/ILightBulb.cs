@@ -14,7 +14,5 @@ namespace TheDarkNight.Lights {
         void TurnOn();
 
         void TurnOff();
-
-        void Destroy();
     }
 }

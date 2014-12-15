@@ -7,9 +7,9 @@ using UnityEngine;
 
 namespace TheDarkNight.Lights {
 
-    [RequireComponent(typeof(DarknessHider))]
     public class LightBulb : Pickable, ILightBulb {
         private Light pointLight;
+
 
         private ISubject<Unit> destroyed = new Subject<Unit>();
 
@@ -17,9 +17,8 @@ namespace TheDarkNight.Lights {
             get { return destroyed; }
         }
 
-        public void Destroy() {
+        public void OnDestroy() {
             destroyed.OnNext(Unit.Default);
-            Destroy(this.gameObject);
         }
 
         public bool CanTurnOn() {
@@ -41,8 +40,8 @@ namespace TheDarkNight.Lights {
 
         protected override void Start() {
             base.Start();
-            collider.isTrigger = true;
             pointLight = this.TryGetComponentsInChildren<Light>().First();
+            pointLight.enabled = false;
         }
     }
 }

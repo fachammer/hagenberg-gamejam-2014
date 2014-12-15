@@ -7,7 +7,6 @@ using System;
 using System.Linq;
 using UniRx;
 using TheDarkNight.Rooms;
-using TheDarkNight.Extensions;
 using System.Collections.Generic;
 
 namespace TheDarkNight.Darkness {
@@ -18,7 +17,6 @@ namespace TheDarkNight.Darkness {
         private IDisposable subscription = Disposable.Empty;
         private Transform nextRoomEntry;
         private Room nextRoom;
-        private Vector3 lastPos;
 
         [SerializeField]
         private GameObject darknessDummyPrefab;
@@ -44,21 +42,11 @@ namespace TheDarkNight.Darkness {
         [SerializeField]
         private float minSpeed = 0.5f;
 
-        [SerializeField]
-        private float instantiateDistance = 1f;
-
-        [SerializeField]
-        private float startWaitSeconds = 1f;
-
         public void SetValues(Transform startingEntry) {
             this.startingEntry = startingEntry;
         }
 
         private void Update() {
-            transform.Rotate(0, rotateSpeed * UnityEngine.Time.deltaTime, 0);
-        }
-
-        private void Move() {
             transform.position = Vector3.MoveTowards(transform.position, nextRoomEntry.position, UnityEngine.Random.Range(maxSpeed, minSpeed));
 
             if(transform.position == nextRoomEntry.position && RoomEnterable(nextRoom)) {
@@ -87,33 +75,15 @@ namespace TheDarkNight.Darkness {
             Destroy(this.gameObject);
         }
 
-        public void SetHidden(bool hidden) {
-            this.enabled = !hidden;
-            this.GetComponent<MeshRenderer>().enabled = !hidden;
-        }
-
         private void OnDestroy() {
             updateSubscription.Dispose();            
             subscription.Dispose();
         }
 
-        private void OnDisable() {
-            updateSubscription.Dispose();
-            subscription.Dispose();
-        }
-
         private void Start() {
-            subscription = Time.Once(startWaitSeconds).Subscribe(_ => {
-                nextRoomEntry = startingEntry;
-                nextRoom = nextRoomEntry.GetComponentInParent<Room>();
-                lastPos = transform.position;
-                updateSubscription = Time.ElapsedIntervals(1 / updateFrequency).Subscribe(__ => Move());
-            });
-        }
-
-        private void OnEnable() {
-            if(Time != null)
-                Start();
+            nextRoomEntry = startingEntry;
+            nextRoom = nextRoomEntry.GetComponentInParent<Room>();
+            //updateSubscription = Time.ElapsedIntervals(1 / updateFrequency).Subscribe(__ => Move());
         }
 
         private void OnCollisionEnter(Collision other) {
