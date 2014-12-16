@@ -20005,7 +20005,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '<b>WASD (P1) / Arrow Keys (P2)</b>f Move
+  m_Text: '<b>WASD (P1) / Arrow Keys (P2)</b> Move
 
     <b>E (P1) / Shift (P2)</b> Pickup / Exchange Lightbulb
 
@@ -49117,7 +49117,7 @@ Prefab:
       objectReference: {fileID: 1071790647}
     - target: {fileID: 11400012, guid: ea385dffebdeeae438edb718c3713f48, type: 2}
       propertyPath: m_Text
-      value: '<b>WASD (P1) / Arrow Keys (P2)</b>f Move
+      value: '<b>WASD (P1) / Arrow Keys (P2)</b> Move
 
         <b>E (P1) / Shift (P2)</b> Pickup / Exchange Lightbulb
 
