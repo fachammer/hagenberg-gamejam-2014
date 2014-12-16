@@ -29,7 +29,7 @@ namespace TheDarkNight.Lights {
         [SerializeField]
         private int maxActiveLights;
 
-        private bool turnedOn = true;
+        public bool turnedOn = true;
         private int activeLights = 0;
 
         private void Start() {

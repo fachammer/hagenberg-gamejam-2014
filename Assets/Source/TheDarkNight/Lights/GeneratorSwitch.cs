@@ -25,7 +25,7 @@ namespace TheDarkNight.Lights {
         private void OnTriggerEnter(Collider other) {
             ISwitcher switcher = other.GetClass<ISwitcher>();
 
-            if(switcher != null) {
+            if(switcher != null && !generator.turnedOn) {
                 switcher.CanToggleSwitch(this);
             }
         }

@@ -184,6 +184,7 @@ MonoBehaviour:
   - {fileID: 639387153}
   redLight: {fileID: 780949179}
   maxActiveLights: 4
+  turnedOn: 1
 --- !u!82 &3179469
 AudioSource:
   m_ObjectHideFlags: 0
@@ -39869,6 +39870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722612627b78257408c585c32de47b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 1071790647}
   cooldown: 2
   spawnpos:
   - {fileID: 526360053}
