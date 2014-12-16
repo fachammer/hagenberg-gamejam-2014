@@ -159,11 +159,9 @@ MonoBehaviour:
   darknessDummyPrefab: {fileID: 100000, guid: e46618b0395063847b6e864b8a8a0327, type: 2}
   startingEntry: {fileID: 0}
   updateFrequency: 100
-  maxSpeed: .00499999989
+  maxSpeed: .5
   rotateSpeed: 5
-  minSpeed: .00200000009
-  instantiateDistance: .5
-  startWaitSeconds: 1
+  minSpeed: .25
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

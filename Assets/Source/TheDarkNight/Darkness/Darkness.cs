@@ -47,7 +47,7 @@ namespace TheDarkNight.Darkness {
         }
 
         private void Update() {
-            transform.position = Vector3.MoveTowards(transform.position, nextRoomEntry.position, UnityEngine.Random.Range(maxSpeed, minSpeed));
+            transform.position = Vector3.MoveTowards(transform.position, nextRoomEntry.position, UnityEngine.Time.deltaTime * UnityEngine.Random.Range(maxSpeed, minSpeed));
 
             if(transform.position == nextRoomEntry.position && RoomEnterable(nextRoom)) {
                 IEnumerable<Transform> entriesToAdjacentRooms = nextRoom.GetAdjacentRoomsEntries();
